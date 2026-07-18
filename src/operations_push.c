@@ -24,6 +24,7 @@ void	pa(t_stack *stack)
 	stack->a = tmp;
 	stack->size_a++;
 	stack->size_b--;
+    stack->benchmark.pa++;
 	write(1, "pa\n", 3);
 }
 
@@ -39,5 +40,6 @@ void	pb(t_stack *stack)
 	stack->b = tmp;
 	stack->size_b++;
 	stack->size_a--;
+    stack->benchmark.pb++;
 	write(1, "pb\n", 3);
 }

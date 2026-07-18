@@ -31,12 +31,14 @@ static void	rotate(t_list **list, int size)
 void	ra(t_stack *stack)
 {
 	rotate(&stack->a, stack->size_a);
+    stack->benchmark.ra++;
 	write(1, "ra\n", 3);
 }
 
 void	rb(t_stack *stack)
 {
 	rotate(&stack->b, stack->size_b);
+    stack->benchmark.rb++;
 	write(1, "rb\n", 3);
 }
 
@@ -44,5 +46,6 @@ void	rr(t_stack *stack)
 {
 	rotate(&stack->a, stack->size_a);
 	rotate(&stack->b, stack->size_b);
+    stack->benchmark.rr++;
 	write(1, "rr\n", 3);
 }

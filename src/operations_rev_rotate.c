@@ -33,12 +33,14 @@ static void	reverse_rotate(t_list **list, int size)
 void	rra(t_stack *stack)
 {
 	reverse_rotate(&stack->a, stack->size_a);
+    stack->benchmark.rra++;
 	write(1, "rra\n", 3);
 }
 
 void	rrb(t_stack *stack)
 {
 	reverse_rotate(&stack->b, stack->size_b);
+    stack->benchmark.rrb++;
 	write(1, "rrb\n", 3);
 }
 
@@ -46,5 +48,6 @@ void	rrr(t_stack *stack)
 {
 	reverse_rotate(&stack->a, stack->size_a);
 	reverse_rotate(&stack->b, stack->size_b);
+    stack->benchmark.rrr++;
 	write(1, "rrr\n", 3);
 }
