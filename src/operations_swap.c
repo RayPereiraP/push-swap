@@ -1,48 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operarions_rotate.c                                :+:      :+:    :+:   */
+/*   operations_swap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/18 11:50:37 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/18 11:50:37 by wgolbert         ###   ########.fr       */
+/*   Created: 2026/07/18 11:51:13 by wgolbert          #+#    #+#             */
+/*   Updated: 2026/07/18 11:51:13 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate(t_list **list, int size)
+static void	swap(t_list **list, int size)
 {
-	t_list	*head;
 	t_list	*tmp;
 
 	if (size <= 1)
 		return ;
-	head = *list;
-	*list = (*list)->next;
-	head->next = NULL;
-	tmp = *list;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = head;
+	tmp = (*list)->next;
+	(*list)->next = tmp->next;
+	tmp->next = *list;
+	*list = tmp;
 }
 
-void	ra(t_stack *stack)
+void	sa(t_stack *stack)
 {
-	rotate(&stack->a, stack->size_a);
-	write(1, "ra\n", 3);
+	swap(&stack->a, stack->size_a);
+	write(1, "sa\n", 3);
 }
 
-void	rb(t_stack *stack)
+void	sb(t_stack *stack)
 {
-	rotate(&stack->b, stack->size_b);
-	write(1, "rb\n", 3);
+	swap(&stack->b, stack->size_b);
+	write(1, "sb\n", 3);
 }
 
-void	rr(t_stack *stack)
+void	ss(t_stack *stack)
 {
-	rotate(&stack->a, stack->size_a);
-	rotate(&stack->b, stack->size_b);
-	write(1, "rr\n", 3);
+	swap(&stack->a, stack->size_a);
+	swap(&stack->b, stack->size_b);
+	write(1, "ss\n", 3);
 }

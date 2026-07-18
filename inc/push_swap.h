@@ -10,3 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include <unistd.h>
+
+typedef struct s_list
+{
+	int				value;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct s_stack
+{
+	t_list			*a;
+	int				size_a;
+	t_list			*b;
+	int				size_b;
+}					t_stack;
+
+#endif
