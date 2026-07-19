@@ -10,3 +10,37 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME        = push_swap
+
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -Iinc
+
+SRC_DIR     = src
+OBJ_DIR     = obj
+INC_DIR     = inc
+
+SRC_FILES   = main.c parser.c utils.c stack_utils.c operations_swap.c operations_push.c
+SRCS        = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+
+OBJS        = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+clean:
+	rm -rf $(OBJ_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
