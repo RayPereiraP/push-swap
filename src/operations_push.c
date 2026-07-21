@@ -16,14 +16,20 @@ void	pb(t_push_swap *ps)
 {
 	t_list	*tmp;
 
-	if (stack->s == 0)
+	if (ps->a->size == 0)
 		return ;
-	tmp = stack->a;
-	stack->a = stack->a->next;
-	tmp->next = stack->b;
-	stack->b = tmp;
-	stack->size_a--;
-	stack->size_b++;
+	tmp = ps->a->head;
+	ps->a->head = ps->a->head->next;
+	tmp->next = ps->b->head;
+	ps->b->head = tmp;
+	ps->a->size--;
+	if (ps->a->size == 0)
+    	ps->a->tail = NULL;
+	else if (ps->a->size == 1)
+    	ps->a->tail = ps->a->head;
+	ps->b->size++;
+	if (ps->b->size == 1)
+    	ps->b->tail = ps->b->head;
 	ps->benchmark.pb++;
 	write(1, "pb\n", 3);
 }
@@ -32,14 +38,20 @@ void	pa(t_push_swap *ps)
 {
 	t_list	*tmp;
 
-	if (stack->size_b == 0)
+	if (ps->b->size == 0)
 		return ;
-	tmp = stack->b;
-	stack->b = stack->b->next;
-	tmp->next = stack->a;
-	stack->a = tmp;
-	stack->size_a++;
-	stack->size_b--;
+	tmp = ps->b->head;
+	ps->b->head = ps->b->head->next;
+	tmp->next = ps->a->head;
+	ps->a->head = tmp;
+	ps->b->size--;
+	if (ps->b->size == 0)
+    	ps->b->tail = NULL;
+	else if (ps->b->size == 1)
+    	ps->b->tail = ps->b->head;
+	ps->a->size++;
+	if (ps->a->size == 1)
+    	ps->a->tail = ps->a->head;
 	ps->benchmark.pa++;
 	write(1, "pa\n", 3);
 }

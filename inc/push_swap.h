@@ -56,7 +56,7 @@ void				pa(t_push_swap *stack);
 void				pb(t_push_swap *stack);
 void				ra(t_push_swap *stack);
 void				rb(t_push_swap *stack);
-void				rr(t_push_swap);
+void				rr(t_push_swap *stack);
 void				rra(t_push_swap *stack);
 void				rrb(t_push_swap *stack);
 void				rrr(t_push_swap *stack);

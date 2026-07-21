@@ -14,19 +14,16 @@
 
 static void	rotate(t_stack *stack)
 {
-	t_list	*head;
 	t_list	*tmp;
 
-	if (size <= 1)
+	if (stack->size <= 1)
 		return ;
-	head = *list;
-	*list = (*list)->next;
-	head->next = NULL;
-	tmp = *list;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = head;
-	*tail = head;
+	tmp = stack->head;
+	stack->head = tmp->next;
+	stack->tail->next = tmp;
+	tmp->next = NULL;
+	stack->tail = tmp;
+	
 }
 
 void	ra(t_push_swap *ps)

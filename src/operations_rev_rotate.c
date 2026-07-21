@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	reverse_rotate(t_stack **list)
+static void	reverse_rotate(t_stack *list)
 {
 	t_list	*tmp;
 
@@ -26,22 +26,22 @@ static void	reverse_rotate(t_stack **list)
 
 void	rra(t_push_swap *ps)
 {
-	reverse_rotate(&ps->a);
+	reverse_rotate(ps->a);
     ps->benchmark.rra++;
 	write(1, "rra\n", 3);
 }
 
 void	rrb(t_push_swap *ps)
 {
-	reverse_rotate(&ps->b);
+	reverse_rotate(ps->b);
     ps->benchmark.rrb++;
 	write(1, "rrb\n", 3);
 }
 
 void	rrr(t_push_swap *ps)
 {
-	reverse_rotate(&ps->a);
-	reverse_rotate(&ps->b);
+	reverse_rotate(ps->a);
+	reverse_rotate(ps->b);
     ps->benchmark.rrr++;
 	write(1, "rrr\n", 3);
 }
