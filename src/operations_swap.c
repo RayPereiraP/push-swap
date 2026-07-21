@@ -26,19 +26,17 @@ static void	swap(t_stack *stack)
 		stack->tail = stack->head->next;
 }
 
-
-
 void	sa(t_push_swap *ps)
 {
 	swap(ps->a);
-    ps->benchmark.sa++;
+	ps->benchmark.sa++;
 	write(1, "sa\n", 3);
 }
 
 void	sb(t_push_swap *ps)
 {
 	swap(ps->b);
-    ps->benchmark.sb++;
+	ps->benchmark.sb++;
 	write(1, "sb\n", 3);
 }
 
@@ -46,6 +44,6 @@ void	ss(t_push_swap *ps)
 {
 	swap(ps->a);
 	swap(ps->b);
-    ps->benchmark.ss++;
+	ps->benchmark.ss++;
 	write(1, "ss\n", 3);
 }

@@ -24,12 +24,12 @@ void	pb(t_push_swap *ps)
 	ps->b->head = tmp;
 	ps->a->size--;
 	if (ps->a->size == 0)
-    	ps->a->tail = NULL;
+		ps->a->tail = NULL;
 	else if (ps->a->size == 1)
-    	ps->a->tail = ps->a->head;
+		ps->a->tail = ps->a->head;
 	ps->b->size++;
 	if (ps->b->size == 1)
-    	ps->b->tail = ps->b->head;
+		ps->b->tail = ps->b->head;
 	ps->benchmark.pb++;
 	write(1, "pb\n", 3);
 }
@@ -46,12 +46,12 @@ void	pa(t_push_swap *ps)
 	ps->a->head = tmp;
 	ps->b->size--;
 	if (ps->b->size == 0)
-    	ps->b->tail = NULL;
+		ps->b->tail = NULL;
 	else if (ps->b->size == 1)
-    	ps->b->tail = ps->b->head;
+		ps->b->tail = ps->b->head;
 	ps->a->size++;
 	if (ps->a->size == 1)
-    	ps->a->tail = ps->a->head;
+		ps->a->tail = ps->a->head;
 	ps->benchmark.pa++;
 	write(1, "pa\n", 3);
 }

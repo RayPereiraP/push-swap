@@ -23,7 +23,7 @@ double	compute_disorder(t_stack *stack)
 		return (0);
 	mistakes = 0;
 	total_pairs = 0;
-    cur = stack->head;
+	cur = stack->head;
 	while (cur)
 	{
 		next = cur->next;
