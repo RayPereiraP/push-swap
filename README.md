@@ -10,14 +10,14 @@ Este projeto tem como objetivo ordenar uma pilha de números inteiros utilizando
 *Conforme exigido pelas normas do projeto, abaixo detalhamos o trabalho de cada membro:*
 
 - **rayperei:**
-  - Implementação da estrutura de dados das pilhas (listas encadeadas) e gerenciamento de memória (alocação e liberação segura com `free`).
-  - Módulo de *parsing* e validação de argumentos (tratamento de entradas inválidas, overflow de inteiros de `INT_MIN` a `INT_MAX` e detecção de números duplicados).
-  - Pré-processamento e normalização (indexação dos números de $0$ a $N-1$ para simplificar a manipulação lógica).
+  - Implementação da gestão e tratamento de argumentos (`argc`/`argv`), suportando múltiplos argumentos ou strings únicas com espaços.
+  - Desenvolvimento do sistema de parsing e validação rigorosa de erros (checagem de limites de inteiros `INT_MIN`/`INT_MAX` e detecção de números duplicados).
+  - Criação da estrutura de dados base para as pilhas A e B e alocação dinâmica de memória.
 
 - **wgolbert:**
-  - Implementação das operações básicas das pilhas (`sa`, `sb`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, `rrr`).
-  - Desenvolvimento dos algoritmos de ordenação para pilhas pequenas (casos de 2, 3 e até 5 elementos).
-  - Desenvolvimento do algoritmo de ordenação complexa (Radix Sort / manipulação de bits) e escolha da estratégia adaptativa de ordenação.
+  - Implementação do motor de operações oficiais do projeto (`sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, `rrr`).
+  - Desenvolvimento do pré-processador/normalizador de dados para indexação dos números de `0` a `N-1`.
+  - Colaboração na lógica dos algoritmos de ordenação (`sort_three`, `sort_five` e o algoritmo principal) e configuração do `Makefile`.
 
 ## Instruções de Compilação
 [cite_start]O projeto utiliza um `Makefile` padrão[cite: 568]:
