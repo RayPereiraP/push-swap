@@ -12,42 +12,36 @@
 
 #include "push_swap.h"
 
-static void	reverse_rotate(t_list **list, int size)
+static void	reverse_rotate(t_stack **list)
 {
-	t_list	*tail;
 	t_list	*tmp;
 
-	if (size <= 1)
+	if ((*list)->size <= 1)
 		return ;
-	tail = *list;
-	while (tail->next)
-	{
-		tail = tail->next;
-		tmp = tail;
-	}
+	tmp = *list;
 	tmp->next = NULL;
 	tail->next = *list;
 	*list = tail;
 }
 
-void	rra(t_stack *stack)
+void	rra(t_push_swap *ps)
 {
-	reverse_rotate(&stack->a, stack->size_a);
-    stack->benchmark.rra++;
+	reverse_rotate(&ps->a);
+    ps->benchmark.rra++;
 	write(1, "rra\n", 3);
 }
 
-void	rrb(t_stack *stack)
+void	rrb(t_push_swap *ps)
 {
-	reverse_rotate(&stack->b, stack->size_b);
-    stack->benchmark.rrb++;
+	reverse_rotate(&ps->b);
+    ps->benchmark.rrb++;
 	write(1, "rrb\n", 3);
 }
 
-void	rrr(t_stack *stack)
+void	rrr(t_push_swap *ps)
 {
-	reverse_rotate(&stack->a, stack->size_a);
-	reverse_rotate(&stack->b, stack->size_b);
-    stack->benchmark.rrr++;
+	reverse_rotate(&ps->a);
+	reverse_rotate(&ps->b);
+    ps->benchmark.rrr++;
 	write(1, "rrr\n", 3);
 }

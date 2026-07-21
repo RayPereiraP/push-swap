@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-void	pb(t_stack *stack)
+void	pb(t_push_swap *ps)
 {
 	t_list	*tmp;
 
-	if (stack->size_a == 0)
+	if (stack->s == 0)
 		return ;
 	tmp = stack->a;
 	stack->a = stack->a->next;
@@ -24,11 +24,11 @@ void	pb(t_stack *stack)
 	stack->b = tmp;
 	stack->size_a--;
 	stack->size_b++;
-	stack->benchmark.pb++;
+	ps->benchmark.pb++;
 	write(1, "pb\n", 3);
 }
 
-void	pa(t_stack *stack)
+void	pa(t_push_swap *ps)
 {
 	t_list	*tmp;
 
@@ -40,6 +40,6 @@ void	pa(t_stack *stack)
 	stack->a = tmp;
 	stack->size_a++;
 	stack->size_b--;
-	stack->benchmark.pa++;
+	ps->benchmark.pa++;
 	write(1, "pa\n", 3);
 }

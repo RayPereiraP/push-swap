@@ -23,14 +23,16 @@ typedef struct s_list
 
 typedef struct s_stack
 {
-	t_list			*a;
-	int				size_a;
-	t_list			*tail_a;
-	t_list			*b;
-	int				size_b;
-	t_list			*tail_b;
+	t_list			*head;
+	t_list			*tail;
+	int				size;
+} 					t_stack;
+typedef struct s_push_swap
+{
+	t_stack			*a;
+	t_stack			*b;
 	t_benchmark		benchmark;
-}					t_stack;
+}					t_push_swap;
 
 typedef struct s_benchmark
 {
@@ -47,17 +49,17 @@ typedef struct s_benchmark
 	int				rrr;
 }					t_benchmark;
 
-void				sa(t_stack *stack);
-void				sb(t_stack *stack);
-void				ss(t_stack *stack);
-void				pa(t_stack *stack);
-void				pb(t_stack *stack);
-void				ra(t_stack *stack);
-void				rb(t_stack *stack);
-void				rr(t_stack *stack);
-void				rra(t_stack *stack);
-void				rrb(t_stack *stack);
-void				rrr(t_stack *stack);
+void				sa(t_push_swap *stack);
+void				sb(t_push_swap *stack);
+void				ss(t_push_swap *stack);
+void				pa(t_push_swap *stack);
+void				pb(t_push_swap *stack);
+void				ra(t_push_swap *stack);
+void				rb(t_push_swap *stack);
+void				rr(t_push_swap);
+void				rra(t_push_swap *stack);
+void				rrb(t_push_swap *stack);
+void				rrr(t_push_swap *stack);
 double				compute_disorder(t_stack *stack);
 
 #endif

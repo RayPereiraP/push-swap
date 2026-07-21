@@ -12,36 +12,40 @@
 
 #include "push_swap.h"
 
-static void	swap(t_list **list, int size)
+static void	swap(t_stack *stack)
 {
 	t_list	*tmp;
 
-	if (size <= 1)
+	if (stack->size <= 1)
 		return ;
-	tmp = (*list)->next;
-	(*list)->next = tmp->next;
-	tmp->next = *list;
-	*list = tmp;
+	tmp = stack->head->next;
+	stack->head->next = tmp->next;
+	tmp->next = stack->head;
+	stack->head = tmp;
+	if (stack->size == 2)
+		stack->tail = stack->head->next;
 }
 
-void	sa(t_stack *stack)
+
+
+void	sa(t_push_swap *ps)
 {
-	swap(&stack->a, stack->size_a);
-    stack->benchmark.sa++;
+	swap(ps->a);
+    ps->benchmark.sa++;
 	write(1, "sa\n", 3);
 }
 
-void	sb(t_stack *stack)
+void	sb(t_push_swap *ps)
 {
-	swap(&stack->b, stack->size_b);
-    stack->benchmark.sb++;
+	swap(ps->b);
+    ps->benchmark.sb++;
 	write(1, "sb\n", 3);
 }
 
-void	ss(t_stack *stack)
+void	ss(t_push_swap *ps)
 {
-	swap(&stack->a, stack->size_a);
-	swap(&stack->b, stack->size_b);
-    stack->benchmark.ss++;
+	swap(ps->a);
+	swap(ps->b);
+    ps->benchmark.ss++;
 	write(1, "ss\n", 3);
 }

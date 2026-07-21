@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	rotate(t_list **list, int size)
+static void	rotate(t_stack *stack)
 {
 	t_list	*head;
 	t_list	*tmp;
@@ -26,26 +26,27 @@ static void	rotate(t_list **list, int size)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = head;
+	*tail = head;
 }
 
-void	ra(t_stack *stack)
+void	ra(t_push_swap *ps)
 {
-	rotate(&stack->a, stack->size_a);
-    stack->benchmark.ra++;
+	rotate(ps->a);
+    ps->benchmark.ra++;
 	write(1, "ra\n", 3);
 }
 
-void	rb(t_stack *stack)
+void	rb(t_push_swap *ps)
 {
-	rotate(&stack->b, stack->size_b);
-    stack->benchmark.rb++;
+	rotate(ps->b);
+    ps->benchmark.rb++;
 	write(1, "rb\n", 3);
 }
 
-void	rr(t_stack *stack)
+void	rr(t_push_swap *ps)
 {
-	rotate(&stack->a, stack->size_a);
-	rotate(&stack->b, stack->size_b);
-    stack->benchmark.rr++;
+	rotate(ps->a);
+	rotate(ps->b);
+    ps->benchmark.rr++;
 	write(1, "rr\n", 3);
 }

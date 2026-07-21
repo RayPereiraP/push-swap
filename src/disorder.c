@@ -19,11 +19,11 @@ double	compute_disorder(t_stack *stack)
 	t_list	*cur;
 	t_list	*next;
 
-	if (stack->size_a < 2)
+	if (stack->size < 2)
 		return (0);
 	mistakes = 0;
 	total_pairs = 0;
-    cur = stack->a;
+    cur = stack->head;
 	while (cur)
 	{
 		next = cur->next;
