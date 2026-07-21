@@ -10,31 +10,56 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-static void rotate_to_min(t_stack *stack, int min_idx)
+# include <unistd.h>
+
+typedef struct s_list
 {
-	if (min_idx <= stack->size_a / 2)
-	{
-		while (min_idx-- > 0)
-			ra(stack);
-	}
-	else
-	{
-		while (min_idx++ < stack->size_a)
-			rra(stack);
-	}
-}
-void algo_simple(t_stack *stack)
+	int				value;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct s_stack
 {
-	
+	t_list			*head;
+	t_list			*tail;
+	int				size;
+} 					t_stack;
+typedef struct s_push_swap
+{
+	t_stack			*a;
+	t_stack			*b;
+	t_benchmark		benchmark;
+}					t_push_swap;
 
-	while (stack->size_a > 0)
-	{
-		rotate_to_min(stack, get_min_index(stack));
-		pb(stack);
-	}
+typedef struct s_benchmark
+{
+	int				sa;
+	int				sb;
+	int				ss;
+	int				pa;
+	int				pb;
+	int				ra;
+	int				rb;
+	int				rr;
+	int				rra;
+	int				rrb;
+	int				rrr;
+}					t_benchmark;
 
-	while (stack->size_b > 0)
-	pa(stack);
-}
+void				sa(t_push_swap *stack);
+void				sb(t_push_swap *stack);
+void				ss(t_push_swap *stack);
+void				pa(t_push_swap *stack);
+void				pb(t_push_swap *stack);
+void				ra(t_push_swap *stack);
+void				rb(t_push_swap *stack);
+void				rr(t_push_swap *stack);
+void				rra(t_push_swap *stack);
+void				rrb(t_push_swap *stack);
+void				rrr(t_push_swap *stack);
+double				compute_disorder(t_stack *stack);
+
+#endif
