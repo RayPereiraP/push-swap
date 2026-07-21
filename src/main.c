@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
 
 // Extraímos a lógica de parsing das flags para uma função separada
 static void handle_flags(int argc, char **argv, int *i, int *flags)
