@@ -12,21 +12,17 @@
 
 #include "push_swap.h"
 
-static void	reverse_rotate(t_stack *stack)
+static void	rotate(t_stack *stack)
 {
-	t_list	*last;
-	t_list	*prev;
+	t_list	*tmp;
 
 	if (stack->size <= 1)
 		return ;
-	prev = stack->head;
-	while (prev->next != stack->tail)
-		prev = prev->next;
-	last = stack->tail;
-	prev->next = NULL;
-	stack->tail = prev;
-	last->next = stack->head;
-	stack->head = last;
+	tmp = stack->head;
+	stack->head = tmp->next;
+	stack->tail->next = tmp;
+	stack->tail = tmp;
+	tmp->next = NULL;
 }
 
 void	ra(t_push_swap *ps)
