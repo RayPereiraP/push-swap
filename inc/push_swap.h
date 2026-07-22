@@ -18,6 +18,7 @@
 typedef struct s_list
 {
 	int				value;
+	int				index;
 	struct s_list	*next;
 }					t_list;
 
@@ -26,7 +27,7 @@ typedef struct s_stack
 	t_list			*head;
 	t_list			*tail;
 	int				size;
-} 					t_stack;
+}					t_stack;
 typedef struct s_push_swap
 {
 	t_stack			*a;
