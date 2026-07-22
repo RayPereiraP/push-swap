@@ -6,35 +6,49 @@
 /*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/19 17:22:59 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:34:46 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void rotate_to_min(t_stack *stack, int min_idx)
+//para rodar na A e trazer o menor nº até o topo, decide se vai mais rápido ou em cima ou para baixo
+static void rotate_to_min(t_stack *data, int min_idx)
 {
-	if (min_idx <= stack->size_a / 2)
+	int	size;
+
+	size = data->size_a;
+	if (min_idx <= size / 2)
 	{
-		while (min_idx-- > 0)
-			ra(stack);
+		while (min_idx > 0)
+		{
+			op_ra(data, 1);
+			min_idx--;
+		}
 	}
 	else
 	{
-		while (min_idx++ < stack->size_a)
-			rra(stack);
+		min_idx = size - min_idx;
+		while (min_idx > 0)
+		{
+			op_rra(data, 1);
+			min_idx--;
+		}
 	}
 }
-void algo_simple(t_stack *stack)
+//verificação de ordenação - se ok, para
+void algo_simple(t_stack *data)
 {
-	
+	int	min_idx;
 
-	while (stack->size_a > 0)
+	if (is_sorted(data->stack_a))
+		return ;
+	while (data->size_a > 0)
 	{
-		rotate_to_min(stack, get_min_index(stack));
-		pb(stack);
+		min_idx = find_position(data->stack_a, stack_min_index(data->stack_a));
+		rotate_to_min(data, min_idx);
+		op_pb(data, 1);
 	}
-
-	while (stack->size_b > 0)
-	pa(stack);
+	while (data->size_b > 0)
+		op_pa(data, 1);
 }
