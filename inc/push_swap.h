@@ -27,6 +27,7 @@ typedef struct s_stack
 	t_list			*tail;
 	int				size;
 } 					t_stack;
+
 typedef struct s_push_swap
 {
 	t_stack			*a;

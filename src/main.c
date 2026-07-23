@@ -6,13 +6,13 @@
 /*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:24 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/19 17:24:48 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/07/22 19:50:51 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Extraímos a lógica de parsing das flags para uma função separada
+//função estática para processar as flags e avançar o índice do argv
 static void handle_flags(int argc, char **argv, int *i, int *flags)
 {
 	while (*i < argc && argv[*i][0] == '-' && argv[*i][1] == '-')
@@ -26,39 +26,45 @@ static void handle_flags(int argc, char **argv, int *i, int *flags)
 		(*i)++;
 	}
 }
-
-static void execute_algo(t_stack *stack, int algo_flag)
+//decide qual dos algoritmos vai executar com base na flag ou no que for de desordem
+static void execute_algo(t_push_swap *ps, int algo_flag)
 {
-	double disorder = compute_disorder(stack);
-
+	double disorder;
+	
+	disorder = compute_disorder(ps->a);
 	if (algo_flag == 0) 
 	{
 		if (disorder < 0.2) algo_flag = 1;
 		else if (disorder < 0.5) algo_flag = 2; 
 		else algo_flag = 3; 
 	}
-	if (algo_flag == 1) algo_simple(stack);
-	else if (algo_flag == 2) algo_medium(stack);
-	else if (algo_flag == 3) algo_complex(stack);
+	if (algo_flag == 1) algo_simple(ps);
+	else if (algo_flag == 2) algo_medium(ps);
+	else if (algo_flag == 3) algo_complex(ps);
 }
-
+// Função principal que faz o fluxo do programa rodar
 int main(int argc, char **argv)
 {
-	t_stack stack;
-	int		i = 1;
-	int		flags[2] = {0, 0}; // flags[0] = algo, flags[1] = bench
+	t_push_swap	ps;
+	int			i;
+	int			flags[4]; // flags = algo, flags[1] = bench
 
-	if (argc < 2) return (0);
-	init_stack(&stack);
+	if (argc < 2)
+		return (0);
+	i = 1;
+	flags = 0;
+	flags[1] = 0;
+	init_push_swap(&ps); // Inicializa structs e zera benchmark
 	handle_flags(argc, argv, &i, flags);
-	if (parse_arguments(argc - i, argv + i, &stack) != 0)
+	if (parse_arguments(argc - i, argv + i, &ps) != 0)
 	{
 		write(2, "Error\n", 6);
-		return (free_and_exit(&stack));
+		return (free_and_exit(&ps, 1));
 	}
-	if (!is_sorted(&stack))
-		execute_algo(&stack, flags[0]);
-	// if (flags[1]) print_benchmark(&stack, ...);
-	free_stack(&stack);
+	if (!is_sorted(ps.a))
+		execute_algo(&ps, flags);
+	if (flags[1])
+		print_benchmark(&ps); // Exibe métricas no stderr
+	free_and_exit(&ps, 0);
 	return (0);
 }
