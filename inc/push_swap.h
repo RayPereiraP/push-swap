@@ -63,4 +63,15 @@ void				rrb(t_push_swap *stack);
 void				rrr(t_push_swap *stack);
 double				compute_disorder(t_stack *stack);
 
+/*
+se precisar colocar sobre o parse e flags
+int		parse_arguments(int argc, char **argv, t_push_swap *ps);
+int		handle_flags(int argc, char **argv, int *i, t_push_swap *ps);
+
+e da memorua e utils
+long	ft_atol(const char *str);
+int		free_and_exit(t_push_swap *ps, int status);
+void	free_all(t_push_swap *ps);
+*/
+
 #endif

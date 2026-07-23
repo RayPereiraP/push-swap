@@ -6,7 +6,7 @@
 #    By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/28 21:05:01 by rayperei          #+#    #+#              #
-#    Updated: 2026/07/19 17:26:39 by rayperei         ###   ########.fr        #
+#    Updated: 2026/07/23 14:46:25 by rayperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC_DIR		= inc
 SRC_FILES	= main.c parser.c utils.c stack_utils.c operations_swap.c operations_push.c
 SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
-OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS		= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 

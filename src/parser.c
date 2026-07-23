@@ -6,7 +6,7 @@
 /*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 12:15:16 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/22 20:43:33 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:34:11 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static long		ft_atol(const char *str)
 		res = res * 10 + (*str - '0');
 		str++;
 	}
-	return (res * sign)
+	return (res * sign);
 }
 
 //verifiac na pilha a se o valor já existe - duplicatas
@@ -94,7 +94,7 @@ static int 		add_to_stack(t_stack *stack, int value)
 	return (0);
 }
 
-//função principla do parser chamada pelo main.c
+//função principal do parser chamada pelo main.c
 int 	parse_arguments(int argc, char **argv, t_push_swap *ps)
 {
 	int 	i;
