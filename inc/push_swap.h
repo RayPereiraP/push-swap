@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/28 21:06:50 by rayperei          #+#    #+#             */
-/*   Updated: 2026/06/28 21:06:51 by rayperei         ###   ########.fr       */
+/*   Created: 2026/07/23 12:38:59 by wgolbert          #+#    #+#             */
+/*   Updated: 2026/07/23 12:38:59 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_list
@@ -28,12 +29,6 @@ typedef struct s_stack
 	t_list			*tail;
 	int				size;
 }					t_stack;
-typedef struct s_push_swap
-{
-	t_stack			*a;
-	t_stack			*b;
-	t_benchmark		benchmark;
-}					t_push_swap;
 
 typedef struct s_benchmark
 {
@@ -49,6 +44,13 @@ typedef struct s_benchmark
 	int				rrb;
 	int				rrr;
 }					t_benchmark;
+
+typedef struct s_push_swap
+{
+	t_stack			*a;
+	t_stack			*b;
+	t_benchmark		benchmark;
+}					t_push_swap;
 
 void				sa(t_push_swap *stack);
 void				sb(t_push_swap *stack);
