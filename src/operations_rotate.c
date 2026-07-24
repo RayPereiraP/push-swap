@@ -29,14 +29,16 @@ void	ra(t_push_swap *ps)
 {
 	rotate(ps->a);
 	ps->benchmark.ra++;
-	write(1, "ra\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "ra\n", 3);
 }
 
 void	rb(t_push_swap *ps)
 {
 	rotate(ps->b);
 	ps->benchmark.rb++;
-	write(1, "rb\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "rb\n", 3);
 }
 
 void	rr(t_push_swap *ps)
@@ -44,5 +46,6 @@ void	rr(t_push_swap *ps)
 	rotate(ps->a);
 	rotate(ps->b);
 	ps->benchmark.rr++;
-	write(1, "rr\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "rr\n", 3);
 }

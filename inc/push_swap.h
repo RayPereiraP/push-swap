@@ -45,10 +45,16 @@ typedef struct s_benchmark
 	int				rrr;
 }					t_benchmark;
 
+typedef struct s_flags
+{
+	char			flag;
+	int				bench;
+} 					t_flags;
 typedef struct s_push_swap
 {
 	t_stack			*a;
 	t_stack			*b;
+	t_flags			flags;
 	t_benchmark		benchmark;
 }					t_push_swap;
 

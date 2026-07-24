@@ -10,3 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+void stack_index(int *stack)
+{
+    int	i;
+
+}
+
+
+static int *quicksort(int *list)
+{
+    
+}

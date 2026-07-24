@@ -30,14 +30,16 @@ void	sa(t_push_swap *ps)
 {
 	swap(ps->a);
 	ps->benchmark.sa++;
-	write(1, "sa\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "sa\n", 3);
 }
 
 void	sb(t_push_swap *ps)
 {
 	swap(ps->b);
 	ps->benchmark.sb++;
-	write(1, "sb\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "sb\n", 3);
 }
 
 void	ss(t_push_swap *ps)
@@ -45,5 +47,6 @@ void	ss(t_push_swap *ps)
 	swap(ps->a);
 	swap(ps->b);
 	ps->benchmark.ss++;
-	write(1, "ss\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "ss\n", 3);
 }

@@ -31,7 +31,8 @@ void	pb(t_push_swap *ps)
 	if (ps->b->size == 1)
 		ps->b->tail = ps->b->head;
 	ps->benchmark.pb++;
-	write(1, "pb\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "pb\n", 3);
 }
 
 void	pa(t_push_swap *ps)
@@ -53,5 +54,6 @@ void	pa(t_push_swap *ps)
 	if (ps->a->size == 1)
 		ps->a->tail = ps->a->head;
 	ps->benchmark.pa++;
-	write(1, "pa\n", 3);
+	if (ps->flags.bench == 0)
+		write(1, "pa\n", 3);
 }
