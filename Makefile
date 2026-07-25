@@ -6,23 +6,40 @@
 #    By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/28 21:05:01 by rayperei          #+#    #+#              #
-#    Updated: 2026/06/28 21:05:02 by rayperei         ###   ########.fr        #
+#    Updated: 2026/07/23 14:46:25 by rayperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = push_swap
+NAME		= push_swap
 
-CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -Iinc
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -Iinc
 
-SRC_DIR     = src
-OBJ_DIR     = obj
-INC_DIR     = inc
+SRC_DIR		= src
+OBJ_DIR		= obj
+INC_DIR		= inc
 
-SRC_FILES   = main.c parser.c utils.c stack_utils.c operations_swap.c operations_push.c
-SRCS        = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+SRC_FILES	= main.c \
+			  parser.c \
+			  utils.c \
+			  flags.c \
+			  disorder.c \
+			  free_memory.c \
+			  push_swap_init.c \
+			  stack_index.c \
+			  benchmark.c \
+			  operations_swap.c \
+			  operations_push.c \
+			  operations_rotate.c \
+			  operations_rev_rotate.c \
+			  algo_simple.c \
+			  algo_medium.c \
+			  algo_complex.c \
+			  algo_adaptive.c
+			  
+SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
-OBJS        = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS		= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 

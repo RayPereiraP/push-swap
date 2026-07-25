@@ -6,128 +6,68 @@
 /*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:24 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/19 15:25:26 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:39:24 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
+#include <stdlib.h>
 
-static int ft_strcmp(const char *s1, const char *s2)
+// decide qual algoritmo executar, com base na flag escolhida
+static void	execute_algo(t_push_swap *ps, int algo_flag)
 {
-    while (*s1 && *s1 == *s2)
-    {
-        s1++;
-        s2++;
-    }
-    return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	if (algo_flag == 1)
+		algo_simple(ps);
+	else if (algo_flag == 2)
+		algo_medium(ps);
+	else if (algo_flag == 3)
+		algo_complex(ps);
+	else
+		algo_adaptive(ps);
+}
+ 
+static t_push_swap	*parse_and_init(int argc, char **argv, int *flags)
+{
+	t_push_swap	*ps;
+	int			*array;
+	int			size;
+	int			i;
+
+	i = 1;
+	flags[0] = 0;
+	flags[1] = 0;
+	handle_flags(argc, argv, &i, flags);
+	if (parse_arguments(argc - i, argv + i, &array, &size) != 0)
+		return (NULL);
+	if (size < 2)
+	{
+		free(array);
+		exit(0);
+	}
+	ps = init_push_swap(array, size, flags[1], (char)flags[0]);
+	free(array);
+	return (ps);
 }
 
-static void init_stack(t_stack *stack)
+int	main(int argc, char **argv)
 {
-    stack->a = NULL;
-    stack->b = NULL;
-    stack->size_a = 0;
-    stack->size_b = 0;
-    stack->benchmark.sa = 0;
-    stack->benchmark.sb = 0;
-    stack->benchmark.ss = 0;
-    stack->benchmark.pa = 0;
-    stack->benchmark.pb = 0;
-    stack->benchmark.ra = 0;
-    stack->benchmark.rb = 0;
-    stack->benchmark.rr = 0;
-    stack->benchmark.rra = 0;
-    stack->benchmark.rrb = 0;
-    stack->benchmark.rrr = 0;
-}
+	t_push_swap	*ps;
+	int			flags[2];
+	double		disorder;
 
-static int is_sorted(t_stack *stack)
-{
-    t_list *tmp;
-
-    if (!stack->a)
-        return (1);
-    tmp = stack->a;
-    while (tmp->next)
-    {
-        if (tmp->value > tmp->next->value)
-            return (0);
-        tmp = tmp->next;
-    }
-    return (1);
-}
-
-int main(int argc, char **argv)
-{
-    t_stack stack;
-    int     i;
-    int     algo_flag;
-    int     bench_flag;
-    double  disorder;
-
-    if (argc < 2)
-        return (0);
-
-    init_stack(&stack);
-    i = 1;
-    algo_flag = 0;
-    bench_flag = 0;
-
-    while (i < argc && argv[i][0] == '-' && argv[i][1] == '-')
-    {
-        if (ft_strcmp(argv[i], "--simple") == 0)
-            algo_flag = 1;
-        else if (ft_strcmp(argv[i], "--medium") == 0)
-            algo_flag = 2;
-        else if (ft_strcmp(argv[i], "--complex") == 0)
-            algo_flag = 3;
-        else if (ft_strcmp(argv[i], "--adaptive") == 0)
-            algo_flag = 0;
-        else if (ft_strcmp(argv[i], "--bench") == 0)
-            bench_flag = 1;
-        else
-            break;
-        i++;
-    }
-
-    if (parse_arguments(argc - i, argv + i, &stack) != 0)
-    {
-        write(2, "Error\n", 6);
-        free_stack(&stack);
-        return (1);
-    }
-
-    if (is_sorted(&stack))
-    {
-        free_stack(&stack);
-        return (0);
-    }
-
-    disorder = compute_disorder(&stack);
-
-    if (algo_flag == 0) 
-    {
-        if (disorder < 0.2)
-            algo_flag = 1;
-        else if (disorder < 0.5)
-            algo_flag = 2; 
-        else
-            algo_flag = 3; 
-    }
-
-    if (algo_flag == 1)
-        algo_simple(&stack);
-    else if (algo_flag == 2)
-        algo_medium(&stack);
-    else if (algo_flag == 3)
-        algo_complex(&stack);
-
-    if (bench_flag)
-    {
-        // criar essa função no arquivo benchmark.c!
-        // print_benchmark(&stack, disorder, algo_flag); 
-    }
-
-    free_stack(&stack);
-    return (0);
+	if (argc < 2)
+		return (0);
+	ps = parse_and_init(argc, argv, flags);
+	if (!ps)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	disorder = compute_disorder(ps->a);
+	if (!is_sorted(ps->a))
+		execute_algo(ps, flags[0]);
+	if (flags[1])
+		print_benchmark(ps, disorder, flags);
+	free_push_swap(ps);
+	return (0);
 }

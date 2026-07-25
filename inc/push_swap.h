@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/28 21:06:50 by rayperei          #+#    #+#             */
-/*   Updated: 2026/06/28 21:06:51 by rayperei         ###   ########.fr       */
+/*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
+/*   Updated: 2026/07/19 17:22:59 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <stdlib.h>
 # include <unistd.h>
-# include <stdlib.h> //Necessário para malloc() e free()
-# include <limits.h> //Necessário para as constantes INT_MAX e INT_MIN
 
-//Estrutura do nó da lista encadeada
 typedef struct s_list
 {
 	int				value;
-    struct s_list	*next;
+	int				index;
+	struct s_list	*next;
 }					t_list;
 
-// Estrutura para contar as operações (Benchmark)
+typedef struct s_stack
+{
+	t_list			*head;
+	t_list			*tail;
+	int				size;
+} 					t_stack;
+
 typedef struct s_benchmark
 {
 	int				sa;
@@ -40,48 +45,53 @@ typedef struct s_benchmark
 	int				rrr;
 }					t_benchmark;
 
-//Estrutura principal das pilhas A e B
-typedef struct s_stack
+typedef struct s_flags
 {
-	t_list          *a;
-	int             size_a;
-	t_list          *b;
-	int             size_b;
-	t_benchmark     benchmark;
-}                   t_stack;
+	char			flag;
+	int				bench;
+} 					t_flags;
 
-// Operações de Swap
-void    sa(t_stack *stack);
-void    sb(t_stack *stack);
-void    ss(t_stack *stack);
+typedef struct s_push_swap
+{
+	t_stack			*a;
+	t_stack			*b;
+	t_benchmark		benchmark;
+	t_flags			flags;
+}					t_push_swap;
 
-// Operações de Push
-void    pa(t_stack *stack);
-void    pb(t_stack *stack);
+void				sa(t_push_swap *stack);
+void				sb(t_push_swap *stack);
+void				ss(t_push_swap *stack);
+void				pa(t_push_swap *stack);
+void				pb(t_push_swap *stack);
+void				ra(t_push_swap *stack);
+void				rb(t_push_swap *stack);
+void				rr(t_push_swap *stack);
+void				rra(t_push_swap *stack);
+void				rrb(t_push_swap *stack);
+void				rrr(t_push_swap *stack);
 
-// Operações de Rotate
-void    ra(t_stack *stack);
-void    rb(t_stack *stack);
-void    rr(t_stack *stack);
+double				compute_disorder(t_stack *stack); //Disorder / estado da stack 
+int					is_sorted(t_stack *stack); // Disorder / estado da stack
 
-// Operações de Reverse Rotate
-void    rra(t_stack *stack);
-void    rrb(t_stack *stack);
-void    rrr(t_stack *stack);
+int					*index_array(int *stack, int size); //Indexação
 
-// Métrica de Desordem
-double  compute_disorder(t_stack *stack);
+void				algo_simple(t_push_swap *ps); //Algoritmos
+void				algo_medium(t_push_swap *ps);
+void				algo_complex(t_push_swap *ps);
+void				algo_adaptive(t_push_swap *ps);
+ 
+t_push_swap			*init_push_swap(int *array, int size, int bench, char flag); //Inicialização
+ 
+int					parse_arguments(int argc, char **argv, int **array, int *size); //Parsing e flags
+int					handle_flags(int argc, char **argv, int *i, int *flags);
+ 
+void				print_benchmark(t_push_swap *ps, double initial_disorder, int *flags);//Benchmark
+ 
+void				free_stack(t_stack *stack); //memória
+void				free_push_swap(t_push_swap *ps);
 
-// Parser e Tratamento de Erros
-int     parse_arguments(int argc, char **argv, t_stack *stack);
-int     is_valid_number(char *str);
-int     has_duplicates(t_stack *stack);
-void    free_stack(t_stack *stack); // Essencial para limpar a memória se der erro!
-
-// Algoritmos de Ordenação
-void    algo_simple(t_stack *stack);
-void    algo_complex(t_stack *stack);
-void    algo_medium(t_stack *stack);
-void    algo_adaptive(t_stack *stack);
+int					ft_strcmp(const char *s1, const char *s2);//utils
+long				ft_atol(const char *str);
 
 #endif

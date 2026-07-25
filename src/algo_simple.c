@@ -6,70 +6,74 @@
 /*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/19 15:18:36 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:34:46 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
 
-static int get_min_index(t_stack *stack)
+// encontra a posição (0-based) do menor valor
+static int	get_min_position(t_stack *stack)
 {
-    int     min_val;
-    int     min_idx;
-    int     curr_idx;
-    t_list  *tmp;
-
-    if (!stack || !stack->a)
-        return (0);
-    tmp = stack->a;
-    min_val = tmp->value;
-    min_idx = 0;
-    curr_idx = 0;
-    
-    while (tmp)
-    {
-        if (tmp->value < min_val)
-        {
-            min_val = tmp->value;
-            min_idx = curr_idx;
-        }
-        tmp = tmp->next;
-        curr_idx++;
-    }
-    return (min_idx);
+	t_list	*cur;
+	int		min_value;
+	int		position;
+	int		i;
+ 
+	cur = stack->head;
+	min_value = cur->value;
+	position = 0;
+	i = 0;
+	while (cur)
+	{
+		if (cur->value < min_value)
+		{
+			min_value = cur->value;
+			position = i;
+		}
+		cur = cur->next;
+		i++;
+	}
+	return (position);
 }
 
-void algo_simple(t_stack *stack)
+//para rodar na A e trazer o menor nº até o topo, decide se vai mais rápido ou em cima ou para baixo
+static void	rotate_to_min(t_push_swap *ps, int min_idx)
 {
-    int min_idx;
-
-    while (stack->size_a > 0)
-    {
-        min_idx = get_min_index(stack);
-
-        if (min_idx <= stack->size_a / 2)
-        {
-            while (min_idx > 0)
-            {
-                ra(stack);
-                min_idx--;
-            }
-        }
-        
-        else
-        {
-            while (min_idx < stack->size_a)
-            {
-                rra(stack);
-                min_idx++;
-            }
-        }
-        
-        pb(stack);
-    }
-
-    while (stack->size_b > 0)
-    {
-        pa(stack);
-    }
+	int	size;
+ 
+	size = ps->a->size;
+	if (min_idx <= size / 2)
+	{
+		while (min_idx > 0)
+		{
+			ra(ps);
+			min_idx--;
+		}
+	}
+	else
+	{
+		min_idx = size - min_idx;
+		while (min_idx > 0)
+		{
+			rra(ps);
+			min_idx--;
+		}
+	}
+}
+//verificação de ordenação - se ok, para
+void	algo_simple(t_push_swap *ps)
+{
+	int	min_idx;
+ 
+	if (is_sorted(ps->a))
+		return ;
+	while (ps->a->size > 0)
+	{
+		min_idx = get_min_position(ps->a);
+		rotate_to_min(ps, min_idx);
+		pb(ps);
+	}
+	while (ps->b->size > 0)
+		pa(ps);
 }
