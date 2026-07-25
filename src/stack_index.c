@@ -37,10 +37,25 @@ static int *quicksort(int *list, int size)
 {
     
 }
-void stack_index(int *stack)
+int  *index_array(int *stack, int size)
 {
+    int	*idx_array;
+    int	*sorted_array;
     int	i;
 
+    sorted_array = quicksort(stack, size);
+    if (!sorted_array)
+        return (NULL);
+    idx_array = malloc(sizeof(int) * size);
+    if (!idx_array)
+        return (NULL);
+    i = 0;
+    while (i < size)
+    {
+        idx_array[i] = binary_search(sorted_array, stack[i], size);
+        i++;
+    }
+    return (idx_array);
 }
 
 
