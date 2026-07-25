@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
 #include <limits.h>
 
 //verifica se não numeros 
@@ -56,63 +57,57 @@ static long		ft_atol(const char *str)
 }
 
 //verifiac na pilha a se o valor já existe - duplicatas
-static int 		has_duplicate(t_stack *stack, int value)
+static int 		has_duplicate(int *array, int filled, int value)
 {
-	t_list	*curr;
-
-	curr = stack->head;
-	while (curr)
-	{
-		if (curr->value == value)
-			return (1);
-		curr = curr->next;
-	}
-	return (0);
-}
-
-//cria um novo nó e add no final de A 
-static int 		add_to_stack(t_stack *stack, int value)
-{
-	t_list	*new_node;
-
-	new_node = malloc(sizeof(t_list));
-	if (!new_node)
-		return (1);
-	new_node->value = value;
-	new_node->next = NULL;
-	if (!stack->head)
-	{
-		stack->head = new_node;
-		stack->tail = new_node;
-	}
-	else
-	{
-		stack->tail->next = new_node;
-		stack->tail = new_node;
-	}
-	stack->size++;
-	return (0);
-}
-
-//função principal do parser chamada pelo main.c
-int 	parse_arguments(int argc, char **argv, t_push_swap *ps)
-{
-	int 	i;
-	long	value;
-
 	i = 0;
-	while (i < argc)
+	while (i < filled)
 	{
-		if (!is_number(argv[i]))
-			return (1);
-		value = ft_atol(argv[i]);
-		if (value > INT_MAX || value < INT_MIN)
-			return (1);
-		if (has_duplicate(ps->a, (int)value))
-			return (1);
-		if (add_to_stack(ps->a, (int)value) != 0)
+		if (array[i] == value)
 			return (1);
 		i++;
 	}
+	return (0);
+}
+
+// valida e converte um argv[i] em int, checando overflow e duplicata
+static int	validate_and_convert(char *str, int *array, int filled, int *out)
+{
+	long	value;
+ 
+	if (!is_number(str))
+		return (1);
+	value = ft_atol(str);
+	if (value > INT_MAX || value < INT_MIN)
+		return (1);
+	if (has_duplicate(array, filled, (int)value))
+		return (1);
+	*out = (int)value;
+	return (0);
+}
+ 
+// função principal do parser, chamada pelo main.c
+// devolve 0 em sucesso (com *array e *size preenchidos) ou 1 em erro
+int	parse_arguments(int argc, char **argv, int **array, int *size)
+{
+	int	*result;
+	int	i;
+ 
+	if (argc <= 0)
+		return (1);
+	result = malloc(sizeof(int) * argc);
+	if (!result)
+		return (1);
+	i = 0;
+	while (i < argc)
+	{
+		if (validate_and_convert(argv[i], result, i, &result[i]) != 0)
+		{
+			free(result);
+			return (1);
+		}
+		i++;
+	}
+	*array = result;
+	*size = argc;
 	return (0);
 }

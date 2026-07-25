@@ -10,68 +10,96 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
 
-//função estática para processar as flags e avançar o índice do argv
+#include "push_swap.h"
+#include <stdlib.h>
+
+// processa as flags e avança o índice do argv
 static int	handle_flags(int argc, char **argv, int *i, int *flags)
 {
-	while (*i < argc && argv[*i] == '-' && argv[*i][1] == '-')
+	while (*i < argc && argv[*i][0] == '-' && argv[*i][1] == '-')
 	{
-		if (ft_strcmp(argv[*i], "--simple") == 0) flags = 1;
-		else if (ft_strcmp(argv[*i], "--medium") == 0) flags = 2;
-		else if (ft_strcmp(argv[*i], "--complex") == 0) flags = 3;
-		else if (ft_strcmp(argv[*i], "--adaptive") == 0) flags = 0;
-		else if (ft_strcmp(argv[*i], "--bench") == 0) flags[1] = 1;
+		if (ft_strcmp(argv[*i], "--simple") == 0)
+			flags[0] = 1;
+		else if (ft_strcmp(argv[*i], "--medium") == 0)
+			flags[0] = 2;
+		else if (ft_strcmp(argv[*i], "--complex") == 0)
+			flags[0] = 3;
+		else if (ft_strcmp(argv[*i], "--adaptive") == 0)
+			flags[0] = 0;
+		else if (ft_strcmp(argv[*i], "--bench") == 0)
+			flags[1] = 1;
 		else
 			break ;
 		(*i)++;
 	}
 	return (0);
 }
-//decide qual dos algoritmos vai executar com base na flag ou no que for de desordem
-static void execute_algo(t_push_swap *ps, int algo_flag)
+
+// decide qual algoritmo executar, com base na flag ou no nível de desordem
+static void	execute_algo(t_push_swap *ps, int algo_flag)
 {
-	double disorder;
-	
+	double	disorder;
+
 	disorder = compute_disorder(ps->a);
-	if (algo_flag == 0) 
+	if (algo_flag == 0)
 	{
-		if (disorder < 0.2) algo_flag = 1;
-		else if (disorder < 0.5) algo_flag = 2; 
-		else algo_flag = 3; 
+		if (disorder < 0.2)
+			algo_flag = 1;
+		else if (disorder < 0.5)
+			algo_flag = 2;
+		else
+			algo_flag = 3;
 	}
-	if (algo_flag == 1) algo_simple(ps);
-	else if (algo_flag == 2) algo_medium(ps);
-	else if (algo_flag == 3) algo_complex(ps);
+	if (algo_flag == 1)
+		algo_simple(ps);
+	else if (algo_flag == 2)
+		algo_medium(ps);
+	else if (algo_flag == 3)
+		algo_complex(ps);
 }
-// Função principal que faz o fluxo do programa rodar
-int main(int argc, char **argv)
+
+int	main(int argc, char **argv)
 {
 	t_push_swap	ps;
 	int			i;
-	int			flags[13]; // flags = algo, flags[4] = bench
+	int			flags[2]; // flags[0] = algoritmo, flags[1] = bench
+	int			*array;
+	int			size;
 	double		initial_disorder;
 
 	if (argc < 2)
 		return (0);
 	i = 1;
-	flags = 0;
-	flags[4] = 0;
-	init_push_swap(&ps); // Inicializa structs e zera benchmark
+	flags[0] = 0;
+	flags[1] = 0;
 	handle_flags(argc, argv, &i, flags);
-	if (parse_arguments(argc - i, argv + i, &ps) != 0)
+	if (parse_arguments(argc - i, argv + i, &array, &size) != 0)
 	{
 		write(2, "Error\n", 6);
-		return (free_and_exit(&ps, 1));
+		return (1);
 	}
-	index_stack(&ps);//para o radix
+	if (size < 2)
+	{
+		free(array);
+		return (0);
+	}
+	if (init_push_swap(&ps, array, size, flags) != 0)
+	{
+		free(array);
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	free(array);
 	initial_disorder = compute_disorder(ps.a);
 	if (!is_sorted(ps.a))
-		execute_algo(&ps, flags);
-	if (flags[4])
-		print_benchmark(&ps, initial_disorder, flags);// Exibe métricas no stderr
+		execute_algo(&ps, flags[0]);
+	if (flags[1])
+		print_benchmark(&ps, initial_disorder, flags);
 	return (free_and_exit(&ps, 0));
 }
+
+
 /*
 int	main(int argc, char **argv)
 {

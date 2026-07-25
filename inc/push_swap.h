@@ -28,13 +28,6 @@ typedef struct s_stack
 	int				size;
 } 					t_stack;
 
-typedef struct s_push_swap
-{
-	t_stack			*a;
-	t_stack			*b;
-	t_benchmark		benchmark;
-}					t_push_swap;
-
 typedef struct s_benchmark
 {
 	int				sa;
@@ -50,6 +43,13 @@ typedef struct s_benchmark
 	int				rrr;
 }					t_benchmark;
 
+typedef struct s_push_swap
+{
+	t_stack			*a;
+	t_stack			*b;
+	t_benchmark		benchmark;
+}					t_push_swap;
+
 void				sa(t_push_swap *stack);
 void				sb(t_push_swap *stack);
 void				ss(t_push_swap *stack);
@@ -64,14 +64,12 @@ void				rrr(t_push_swap *stack);
 double				compute_disorder(t_stack *stack);
 
 /*
-se precisar colocar sobre o parse e flags
-int		parse_arguments(int argc, char **argv, t_push_swap *ps);
-int		handle_flags(int argc, char **argv, int *i, t_push_swap *ps);
-
-e da memorua e utils
-long	ft_atol(const char *str);
-int		free_and_exit(t_push_swap *ps, int status);
-void	free_all(t_push_swap *ps);
+int					init_push_swap(t_push_swap *ps, int *array, int size, int *flags); //Inicialização
+int					parse_arguments(int argc, char **argv, int **array, int *size); //Parsing e flags
+void				print_benchmark(t_push_swap *ps, double initial_disorder, int *flags); //Benchmark 
+void				free_all(t_push_swap *ps); //Memória
+int					free_and_exit(t_push_swap *ps, int status); //Memória
+int					ft_strcmp(const char *s1, const char *s2); //Utils
 */
 
 #endif
