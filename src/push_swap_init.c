@@ -12,43 +12,59 @@
 
 #include "push_swap.h"
 
-static t_list	*generate_node(int value, int index)
+static int	generate_list(t_stack *stack, int *array, int *idx_array)
 {
-	t_list	*node;
+	t_list	*new;
+    int		i;
 
-	node = malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
-	node->value = value;
-	node->index = index;
-	node->next = NULL;
-	return (node);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	new->value = array[0];
+	new->index = idx_array[0];
+	new->next = NULL;
+    stack->head = new;
+    stack->tail = new;
+    i = 1;
+    while (i < stack->size)
+    {
+        new = malloc(sizeof(t_list));
+        if (!new)
+            return (0);
+        new->value = array[i];
+        new->index = idx_array[i];
+        new->next = NULL;
+        stack->tail->next = new;
+        stack->tail = new;
+        i++;
+    }
+    return (1);
 }
 
 static t_stack	*init_stack(int *array, int size)
 {
 	t_stack	*stack;
-	int		i;
 	int		*idx_array;
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
+    stack->size = size;
+    stack->head = NULL;
+    stack->tail = NULL;
 	idx_array = index_array(array, size);
-	stack->head = generate_node(array[0], idx_array[0]);
-    if (!stack->head)
+    if (!idx_array)
+    {
+        free_stack(stack);
         return (NULL);
-	stack->tail = stack->head;
-	i = 1;
-	while (i < size)
-	{
-		stack->tail->next = generate_node(array[i], idx_array[i]);
-        if (!stack->tail->next)
-            return (NULL);
-        stack->tail = stack->tail->next;
-        i++;
-	}
-	stack->size = size;
+    }
+    if (!generate_list(stack, array, idx_array))
+    {
+        free(idx_array);
+        free_stack(stack);
+        return (NULL);
+    }
+    free(idx_array);
 	return (stack);
 }
 

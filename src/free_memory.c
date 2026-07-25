@@ -25,7 +25,7 @@ static void	free_list(t_list *list)
 	}
 }
 
-static void	free_stack(t_stack *stack)
+void	free_stack(t_stack *stack)
 {
 	if (stack->head)
 		free_list(stack->head);
