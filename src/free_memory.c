@@ -10,6 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
+static void	free_list(t_list *list)
+{
+	t_list	*tmp;
+
+	tmp = NULL;
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+}
+
+void free_stack(t_stack *stack)
+{
+    if (!stack)
+        return;
+    free_list(stack->head);
+    free(stack);
+}
+
+void	free_push_swap(t_push_swap *ps)
+{
+	if (ps->a)
+		free_stack(ps->a);
+	if (ps->b)
+		free_stack(ps->b);
+	free(ps);
+}
+
+
+/*
+caso tenha alguma aqui que seja interessante usar
 //funções de limpeza de memória - por conta do uso de memória dinamicamente (malloc) precisa disso, senão sobra memory leak
 #include "push_swap.h"
 #include <stdlib.h>
@@ -42,3 +77,4 @@ int	free_and_exit(t_push_swap *ps, int status)
 	free_all(ps);
 	return (status);
 }
+*/

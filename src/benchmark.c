@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 // para calcular o total de operações somando todos os contadores da struct 
 static int	get_total_ops(t_benchmark *b)
@@ -41,6 +42,35 @@ static void	check_performance(int size, int total_ops)
 		fprintf(stderr, "EXCELLENT (< 5500 ops)\n");
 	else
 		fprintf(stderr, "Standard (Check PUSH.pdf limits)\n");
+}
+
+static void print_ops_breakdown(t_benchmark *b)
+{
+	ftprint(stdderr, "--- Operations breakdown ---\n");
+	fprintf(stderr, "sa: %d | sb: %d | ss: %d\n", b->sa, b->sb, b->ss);
+	fprintf(stderr, "pa: %d | pb: %d\n", b->pa, b->pb);
+	fprintf(stderr, "ra: %d | rb: %d | rr: %d\n", b->ra, b->rb, b->rr);
+	fprintf(stderr, "rra: %d | rrb: %d | rrr: %d\n", b->rra, b->rrb, b->rrr);
+}
+
+// função principal do benchmark, chamada pelo main.c quando --bench está ativa
+void	print_benchmark(t_push_swap *ps, double initial_disorder, int *flags)
+{
+	int	total_ops;
+	int	size;
+ 
+	total_ops = get_total_ops(&ps->benchmark);
+	size = ps->a->size + ps->b->size;
+	fprintf(stderr, "========= BENCHMARK =========\n");
+	fprintf(stderr, "Size: %d\n", size);
+	fprintf(stderr, "Initial disorder: %.4f\n", initial_disorder);
+	fprintf(stderr, "Strategy: %s\n", get_strategy_info(flags[0]));
+	print_ops_breakdown(&ps->benchmark);
+	fprintf(stderr, "Total operations: %d\n", total_ops);
+	if (size > 0)
+		fprintf(stderr, "Ops/size ratio: %.4f\n", (double)total_ops / size);
+	check_performance(size, total_ops);
+	fprintf(stderr, "==============================\n");
 }
 
 //o que mais seria interessante colocar aqui?

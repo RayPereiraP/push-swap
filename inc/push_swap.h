@@ -13,6 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_list
@@ -42,6 +43,12 @@ typedef struct s_benchmark
 	int				rrb;
 	int				rrr;
 }					t_benchmark;
+
+typedef struct s_flags
+{
+	char			flag;
+	int				bench;
+} 					t_flags;
 
 typedef struct s_push_swap
 {

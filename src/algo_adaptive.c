@@ -12,48 +12,48 @@
 
 #include "push_swap.h"
 
-void	*algo_adaptive(t_stack *stack)
-{
-	int	sorted_tail;
-	int	sorted_head;
-
-	sorted_head = 0;
-	sorted_tail = stack->size_a - 1;
-	while (sorted_head < sorted_tail)
-	{
-		process_a(stack, sorted_tail);
-		process_b(stack, sorted_head);
-		sorted_head++;
-		sorted_tail--;
-	}
-	restore_stack(stack);
-}
-
-static void	process_a(t_stack *stack, int sorted)
+static void	process_a(t_push_swap *ps, int sorted)
 {
 	int	i;
 
 	i = 0;
 	while (i < sorted)
 	{
-		if (stack->a->value > stack->a->next->value)
-			sa(stack);
-		pb(stack);
+		if (ps->a->head->value > ps->a->head->next->value)
+			sa(ps);
+		pb(ps);
 		i++;
 	}
 }
-static void	process_b(t_stack *stack, int sorted)
+
+static void	process_b(t_push_swap *ps, int sorted)
 {
-	while (sorted < stack->size_b)
+	while (sorted < ps->b->size)
 	{
-		if (stack->b->value < stack->b->next->value)
-			sb(stack);
-		pa(stack);
+		if (ps->b->head->value < ps->b->head->next->value)
+			sb(ps);
+		pa(ps);
 	}
 }
 
-static void	restore_stack(t_stack *stack)
+static void	restore_stack(t_push_swap *ps)
 {
-	while (stack->size_b > 0)
-		pa(stack);
+	while (ps->b->size > 0)
+		pa(ps);
+}
+void	algo_adaptive(t_push_swap *ps)
+{
+	int	sorted_tail;
+	int	sorted_head;
+
+	sorted_head = 0;
+	sorted_tail = ps->a->size - 1;
+	while (sorted_head < sorted_tail)
+	{
+		process_a(ps, sorted_tail);
+		process_b(ps, sorted_head);
+		sorted_head++;
+		sorted_tail--;
+	}
+	restore_stack(ps);
 }
