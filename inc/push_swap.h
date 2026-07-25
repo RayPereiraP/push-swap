@@ -19,6 +19,7 @@
 typedef struct s_list
 {
 	int				value;
+	int				index;
 	struct s_list	*next;
 }					t_list;
 
@@ -55,6 +56,7 @@ typedef struct s_push_swap
 	t_stack			*a;
 	t_stack			*b;
 	t_benchmark		benchmark;
+	t_flags			flags;
 }					t_push_swap;
 
 void				sa(t_push_swap *stack);
@@ -68,15 +70,28 @@ void				rr(t_push_swap *stack);
 void				rra(t_push_swap *stack);
 void				rrb(t_push_swap *stack);
 void				rrr(t_push_swap *stack);
-double				compute_disorder(t_stack *stack);
 
-/*
-int					init_push_swap(t_push_swap *ps, int *array, int size, int *flags); //Inicialização
+double				compute_disorder(t_stack *stack); //Disorder / estado da stack 
+int					is_sorted(t_stack *stack); // Disorder / estado da stack
+
+int					*index_array(int *stack, int size); //Indexação
+
+void				algo_simple(t_push_swap *ps); //Algoritmos
+void				algo_medium(t_push_swap *ps);
+void				algo_complex(t_push_swap *ps);
+void				algo_adaptive(t_push_swap *ps);
+ 
+t_push_swap			*init_push_swap(int *array, int size, int bench, char flag); //Inicialização
+ 
 int					parse_arguments(int argc, char **argv, int **array, int *size); //Parsing e flags
-void				print_benchmark(t_push_swap *ps, double initial_disorder, int *flags); //Benchmark 
-void				free_all(t_push_swap *ps); //Memória
-int					free_and_exit(t_push_swap *ps, int status); //Memória
-int					ft_strcmp(const char *s1, const char *s2); //Utils
-*/
+int					handle_flags(int argc, char **argv, int *i, int *flags);
+ 
+void				print_benchmark(t_push_swap *ps, double initial_disorder, int *flags);//Benchmark
+ 
+void				free_stack(t_stack *stack); //memória
+void				free_push_swap(t_push_swap *ps);
+
+int					ft_strcmp(const char *s1, const char *s2);//utils
+long				ft_atol(const char *str);
 
 #endif

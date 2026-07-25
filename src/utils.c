@@ -1,19 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 20:16:16 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/22 20:25:48 by rayperei         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "push_swap.h"
 
-static long		ft_atol(const char *str)
+long	ft_atol(const char *str)
 {
 	long	res;
-	int 	sign;
+	int		sign;
 
 	res = 0;
 	sign = 1;
@@ -30,7 +20,7 @@ static long		ft_atol(const char *str)
 		res = res * 10 + (*str - '0');
 		str++;
 	}
-	return (res * sign)
+	return (res * sign);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)

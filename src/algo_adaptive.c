@@ -17,9 +17,9 @@ static void	process_a(t_push_swap *ps, int sorted)
 	int	i;
 
 	i = 0;
-	while (i < sorted)
+	while (i < sorted && ps->a->size > 0)
 	{
-		if (ps->a->head->value > ps->a->head->next->value)
+		if (ps->a->size > 1 && ps->a->head->value > ps->a->head->next->value)
 			sa(ps);
 		pb(ps);
 		i++;
@@ -28,9 +28,9 @@ static void	process_a(t_push_swap *ps, int sorted)
 
 static void	process_b(t_push_swap *ps, int sorted)
 {
-	while (sorted < ps->b->size)
+	while (sorted < ps->b->size && ps->b->size > 0)
 	{
-		if (ps->b->head->value < ps->b->head->next->value)
+		if (ps->b->size > 1 && ps->b->head->value < ps->b->head->next->value)
 			sb(ps);
 		pa(ps);
 	}
@@ -41,6 +41,7 @@ static void	restore_stack(t_push_swap *ps)
 	while (ps->b->size > 0)
 		pa(ps);
 }
+
 void	algo_adaptive(t_push_swap *ps)
 {
 	int	sorted_tail;

@@ -1,38 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   benchmark.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 13:12:05 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/22 21:26:44 by rayperei         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 #include <stdio.h>
 
-// para calcular o total de operações somando todos os contadores da struct 
+// para calcular o total de operações somando todos os contadores da struct
 static int	get_total_ops(t_benchmark *b)
 {
 	return (b->sa + b->sb + b->ss + b->pa + b->pb + b->ra
 		+ b->rb + b->rr + b->rra + b->rrb + b->rrr);
 }
 
-//retorno da string com o nome e qual algoritmo 
+// retorno da string com o nome e qual algoritmo
 static char	*get_strategy_info(int algo_flag)
 {
 	if (algo_flag == 1)
-		return ("Simple / O(n²)");
+		return ("Simple / O(n^2)");
 	if (algo_flag == 2)
-		return ("Medium / O(n√n)");
+		return ("Medium / O(n sqrt n)");
 	if (algo_flag == 3)
 		return ("Complex / O(n log n)");
-	return ("Adaptive / Automático");
+	return ("Adaptive / Automatico");
 }
 
-//validação do desempenho: se atingiu as metas de nota máxima 
+// validação do desempenho: se atingiu as metas de nota máxima
 static void	check_performance(int size, int total_ops)
 {
 	fprintf(stderr, "Performance: ");
@@ -44,9 +32,10 @@ static void	check_performance(int size, int total_ops)
 		fprintf(stderr, "Standard (Check PUSH.pdf limits)\n");
 }
 
-static void print_ops_breakdown(t_benchmark *b)
+// imprime o breakdown de cada operação individual
+static void	print_ops_breakdown(t_benchmark *b)
 {
-	ftprint(stdderr, "--- Operations breakdown ---\n");
+	fprintf(stderr, "--- Operations breakdown ---\n");
 	fprintf(stderr, "sa: %d | sb: %d | ss: %d\n", b->sa, b->sb, b->ss);
 	fprintf(stderr, "pa: %d | pb: %d\n", b->pa, b->pb);
 	fprintf(stderr, "ra: %d | rb: %d | rr: %d\n", b->ra, b->rb, b->rr);
@@ -58,7 +47,7 @@ void	print_benchmark(t_push_swap *ps, double initial_disorder, int *flags)
 {
 	int	total_ops;
 	int	size;
- 
+
 	total_ops = get_total_ops(&ps->benchmark);
 	size = ps->a->size + ps->b->size;
 	fprintf(stderr, "========= BENCHMARK =========\n");
@@ -72,7 +61,3 @@ void	print_benchmark(t_push_swap *ps, double initial_disorder, int *flags)
 	check_performance(size, total_ops);
 	fprintf(stderr, "==============================\n");
 }
-
-//o que mais seria interessante colocar aqui?
-// comparar o limite final das listas?
-//aqui que vai os limites dos testes?

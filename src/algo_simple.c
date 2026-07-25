@@ -12,17 +12,42 @@
 
 #include "push_swap.h"
 
+// encontra a posição (0-based) do menor valor
+static int	get_min_position(t_stack *stack)
+{
+	t_list	*cur;
+	int		min_value;
+	int		position;
+	int		i;
+ 
+	cur = stack->head;
+	min_value = cur->value;
+	position = 0;
+	i = 0;
+	while (cur)
+	{
+		if (cur->value < min_value)
+		{
+			min_value = cur->value;
+			position = i;
+		}
+		cur = cur->next;
+		i++;
+	}
+	return (position);
+}
+
 //para rodar na A e trazer o menor nº até o topo, decide se vai mais rápido ou em cima ou para baixo
-static void rotate_to_min(t_stack *data, int min_idx)
+static void	rotate_to_min(t_push_swap *ps, int min_idx)
 {
 	int	size;
-
-	size = data->size_a;
+ 
+	size = ps->a->size;
 	if (min_idx <= size / 2)
 	{
 		while (min_idx > 0)
 		{
-			op_ra(data, 1);
+			ra(ps);
 			min_idx--;
 		}
 	}
@@ -31,24 +56,24 @@ static void rotate_to_min(t_stack *data, int min_idx)
 		min_idx = size - min_idx;
 		while (min_idx > 0)
 		{
-			op_rra(data, 1);
+			rra(ps);
 			min_idx--;
 		}
 	}
 }
 //verificação de ordenação - se ok, para
-void algo_simple(t_stack *data)
+void	algo_simple(t_push_swap *ps)
 {
 	int	min_idx;
-
-	if (is_sorted(data->stack_a))
+ 
+	if (is_sorted(ps->a))
 		return ;
-	while (data->size_a > 0)
+	while (ps->a->size > 0)
 	{
-		min_idx = find_position(data->stack_a, stack_min_index(data->stack_a));
-		rotate_to_min(data, min_idx);
-		op_pb(data, 1);
+		min_idx = get_min_position(ps->a);
+		rotate_to_min(ps, min_idx);
+		pb(ps);
 	}
-	while (data->size_b > 0)
-		op_pa(data, 1);
+	while (ps->b->size > 0)
+		pa(ps);
 }

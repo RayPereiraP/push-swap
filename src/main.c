@@ -13,6 +13,62 @@
 #include "push_swap.h"
 #include <stdlib.h>
 
+// decide qual algoritmo executar, com base na flag escolhida
+static void	execute_algo(t_push_swap *ps, int algo_flag)
+{
+	if (algo_flag == 1)
+		algo_simple(ps);
+	else if (algo_flag == 2)
+		algo_medium(ps);
+	else if (algo_flag == 3)
+		algo_complex(ps);
+	else
+		algo_adaptive(ps);
+}
+ 
+int	main(int argc, char **argv)
+{
+	t_push_swap	*ps;
+	int			i;
+	int			flags[2]; // flags[0] = algoritmo, flags[1] = bench
+	int			*array;
+	int			size;
+	double		initial_disorder;
+ 
+	if (argc < 2)
+		return (0);
+	i = 1;
+	flags[0] = 0;
+	flags[1] = 0;
+	handle_flags(argc, argv, &i, flags);
+	if (parse_arguments(argc - i, argv + i, &array, &size) != 0)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	if (size < 2)
+	{
+		free(array);
+		return (0);
+	}
+	ps = init_push_swap(array, size, flags[1], (char)flags[0]);
+	free(array);
+	if (!ps)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	initial_disorder = compute_disorder(ps->a);
+	if (!is_sorted(ps->a))
+		execute_algo(ps, flags[0]);
+	if (flags[1])
+		print_benchmark(ps, initial_disorder, flags);
+	free_push_swap(ps);
+	return (0);
+}
+
+
+/*
 // processa as flags e avança o índice do argv
 static int	handle_flags(int argc, char **argv, int *i, int *flags)
 {
@@ -38,29 +94,19 @@ static int	handle_flags(int argc, char **argv, int *i, int *flags)
 // decide qual algoritmo executar, com base na flag ou no nível de desordem
 static void	execute_algo(t_push_swap *ps, int algo_flag)
 {
-	double	disorder;
-
-	disorder = compute_disorder(ps->a);
-	if (algo_flag == 0)
-	{
-		if (disorder < 0.2)
-			algo_flag = 1;
-		else if (disorder < 0.5)
-			algo_flag = 2;
-		else
-			algo_flag = 3;
-	}
 	if (algo_flag == 1)
 		algo_simple(ps);
 	else if (algo_flag == 2)
 		algo_medium(ps);
 	else if (algo_flag == 3)
 		algo_complex(ps);
+	else
+		algo_adaptive(ps);
 }
 
 int	main(int argc, char **argv)
 {
-	t_push_swap	ps;
+	t_push_swap	*ps;
 	int			i;
 	int			flags[2]; // flags[0] = algoritmo, flags[1] = bench
 	int			*array;
@@ -83,21 +129,21 @@ int	main(int argc, char **argv)
 		free(array);
 		return (0);
 	}
-	if (init_push_swap(&ps, array, size, flags) != 0)
+	ps = init_push_swap(array, size, flags[1], (char)flags[0]);
+	free(array);
+	if (!ps)
 	{
-		free(array);
 		write(2, "Error\n", 6);
 		return (1);
 	}
-	free(array);
-	initial_disorder = compute_disorder(ps.a);
-	if (!is_sorted(ps.a))
-		execute_algo(&ps, flags[0]);
+	initial_disorder = compute_disorder(ps->a);
+	if (!is_sorted(ps->a))
+		execute_algo(ps, flags[0]);
 	if (flags[1])
-		print_benchmark(&ps, initial_disorder, flags);
-	return (free_and_exit(&ps, 0));
-}
-
+		print_benchmark(ps, initial_disorder, flags);
+	free_push_swap(ps);
+	return (0);
+*/
 
 /*
 int	main(int argc, char **argv)

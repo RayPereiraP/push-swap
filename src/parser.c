@@ -1,24 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 12:15:16 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/23 14:34:11 by rayperei         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 #include <stdlib.h>
 #include <limits.h>
 
-//verifica se não numeros 
-static int      is_number(char *str)
+// verifica se a string representa um número válido
+static int	is_number(char *str)
 {
-	int 	i;
-	
+	int	i;
+
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
@@ -32,33 +20,12 @@ static int      is_number(char *str)
 	}
 	return (1);
 }
-//conversão da string para long para detectar o int min e o max
-static long		ft_atol(const char *str)
-{
-	long	res;
-	int 	sign;
 
-	res = 0;
-	sign = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		res = res * 10 + (*str - '0');
-		str++;
-	}
-	return (res * sign);
-}
-
-//verifiac na pilha a se o valor já existe - duplicatas
-static int 		has_duplicate(int *array, int filled, int value)
+// verifica se o valor já existe no array já preenchido
+static int	has_duplicate(int *array, int filled, int value)
 {
+	int	i;
+
 	i = 0;
 	while (i < filled)
 	{
@@ -70,10 +37,11 @@ static int 		has_duplicate(int *array, int filled, int value)
 }
 
 // valida e converte um argv[i] em int, checando overflow e duplicata
+// (ft_atol vive em utils.c, evitando duplicidade de função)
 static int	validate_and_convert(char *str, int *array, int filled, int *out)
 {
 	long	value;
- 
+
 	if (!is_number(str))
 		return (1);
 	value = ft_atol(str);
@@ -84,14 +52,14 @@ static int	validate_and_convert(char *str, int *array, int filled, int *out)
 	*out = (int)value;
 	return (0);
 }
- 
+
 // função principal do parser, chamada pelo main.c
 // devolve 0 em sucesso (com *array e *size preenchidos) ou 1 em erro
 int	parse_arguments(int argc, char **argv, int **array, int *size)
 {
 	int	*result;
 	int	i;
- 
+
 	if (argc <= 0)
 		return (1);
 	result = malloc(sizeof(int) * argc);
