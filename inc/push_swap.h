@@ -49,7 +49,7 @@ typedef struct s_flags
 {
 	char			flag;
 	int				bench;
-} 					t_flags;
+}					t_flags;
 typedef struct s_push_swap
 {
 	t_stack			*a;
@@ -70,5 +70,9 @@ void				rra(t_push_swap *stack);
 void				rrb(t_push_swap *stack);
 void				rrr(t_push_swap *stack);
 double				compute_disorder(t_stack *stack);
+int					*index_array(int *stack, int size);
+t_push_swap			*init_push_swap(int *array, int size, int bench, char flag);
+void				free_stack(t_stack *stack);
+void				free_push_swap(t_push_swap *ps);
 
 #endif

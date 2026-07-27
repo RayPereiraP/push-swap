@@ -80,7 +80,7 @@ static int	*init_merge_sort(int *array, int size)
 	i = 0;
 	buffer = malloc(sizeof(int) * size);
 	if (!buffer)
-		return ;
+		return (NULL);
 	sorted = malloc(sizeof(int) * size);
 	if (!sorted)
 	{
