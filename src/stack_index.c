@@ -33,7 +33,7 @@ static int	binary_search(int *list, int value, int size)
 	return (-1);
 }
 
-static int	*merge(int *array, int *sorted, int start, int middle, int finish)
+static void	merge(int *array, int *sorted, int start, int middle, int finish)
 {
 	int	i;
 	int	j;
@@ -42,17 +42,23 @@ static int	*merge(int *array, int *sorted, int start, int middle, int finish)
 	i = start;
 	j = middle + 1;
 	k = start;
-	while (i < middle && j < finish - middle)
+	while (i <= middle && j <= finish)
 	{
 		if (array[i] < array[j])
 			sorted[k++] = array[i++];
 		else
-            sorted[k++] = array[j++];
+			sorted[k++] = array[j++];
 	}
-	return (array);
+	while (i <= middle)
+		sorted[k++] = array[i++];
+	while (j <= finish)
+		sorted[k++] = array[j++];
+	i = start - 1;
+	while (++i <= finish)
+		array[i] = sorted[i];
 }
 
-static int	*merge_sort(int *array, int *sorted, int start, int finish)
+static void	merge_sort(int *array, int *sorted, int start, int finish)
 {
 	int	middle;
 
@@ -63,8 +69,32 @@ static int	*merge_sort(int *array, int *sorted, int start, int finish)
 		merge_sort(array, sorted, middle + 1, finish);
 		merge(array, sorted, start, middle, finish);
 	}
-	else
-		return (array);
+}
+
+static int	*init_merge_sort(int *array, int size)
+{
+	int	*buffer;
+	int	*sorted;
+	int	i;
+
+	i = 0;
+	buffer = malloc(sizeof(int) * size);
+	if (!buffer)
+		return ;
+	sorted = malloc(sizeof(int) * size);
+	if (!sorted)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	while (i < size)
+	{
+		sorted[i] = array[i];
+		i++;
+	}
+	merge_sort(sorted, buffer, 0, size - 1);
+	free(buffer);
+	return (sorted);
 }
 
 int	*index_array(int *stack, int size)
@@ -73,10 +103,9 @@ int	*index_array(int *stack, int size)
 	int	*sorted_array;
 	int	i;
 
-	sorted_array = malloc(sizeof(int) * size);
-	if (!sorted_array)
-		return (NULL);
-	merge_sort(stack, sorted_array, 0, size);
+	sorted_array = init_merge_sort(stack, size);
+    if (!sorted_array)
+        return (NULL);
 	idx_array = malloc(sizeof(int) * size);
 	if (!idx_array)
 	{
