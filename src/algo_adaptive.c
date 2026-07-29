@@ -12,48 +12,15 @@
 
 #include "push_swap.h"
 
-static void	process_a(t_push_swap *ps, int sorted)
+void algo_adaptive(t_push_swap *ps)
 {
-	int	i;
+	double disorder;
 
-	i = 0;
-	while (i < sorted)
-	{
-		if (ps->a->head->value > ps->a->head->next->value)
-			sa(ps);
-		pb(ps);
-		i++;
-	}
-}
-
-static void	process_b(t_push_swap *ps, int sorted)
-{
-	while (sorted < ps->b->size)
-	{
-		if (ps->b->head->value < ps->b->head->next->value)
-			sb(ps);
-		pa(ps);
-	}
-}
-
-static void	restore_stack(t_push_swap *ps)
-{
-	while (ps->b->size > 0)
-		pa(ps);
-}
-void	algo_adaptive(t_push_swap *ps)
-{
-	int	sorted_tail;
-	int	sorted_head;
-
-	sorted_head = 0;
-	sorted_tail = ps->a->size - 1;
-	while (sorted_head < sorted_tail)
-	{
-		process_a(ps, sorted_tail);
-		process_b(ps, sorted_head);
-		sorted_head++;
-		sorted_tail--;
-	}
-	restore_stack(ps);
+	disorder = compute_disorder(ps->a);
+	if (disorder < 0.2)
+		algo_simple(ps);
+	else if (disorder < 0.5)
+		algo_medium(ps);
+	else
+		algo_complex(ps);
 }
