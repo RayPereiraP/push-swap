@@ -25,12 +25,12 @@ static void	free_list(t_list *list)
 	}
 }
 
-void free_stack(t_stack *stack)
+void	free_stack(t_stack *stack)
 {
-    if (!stack)
-        return;
-    free_list(stack->head);
-    free(stack);
+	if (!stack)
+		return ;
+	free_list(stack->head);
+	free(stack);
 }
 
 void	free_push_swap(t_push_swap *ps)

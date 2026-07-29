@@ -104,8 +104,8 @@ int	*index_array(int *stack, int size)
 	int	i;
 
 	sorted_array = init_merge_sort(stack, size);
-    if (!sorted_array)
-        return (NULL);
+	if (!sorted_array)
+		return (NULL);
 	idx_array = malloc(sizeof(int) * size);
 	if (!idx_array)
 	{

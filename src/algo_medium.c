@@ -19,7 +19,6 @@ static void	process_a(t_push_swap *ps, int position)
 		while (position)
 		{
 			ra(ps);
-			pre_order(ps);
 			position--;
 		}
 	}
@@ -31,19 +30,36 @@ static void	process_a(t_push_swap *ps, int position)
 			position++;
 		}
 	}
-	pb(ps);pre_order_b(ps);
-}
-
-static void	process_b(t_push_swap *ps)
-{
-}
-
-static void	pre_order_b(t_push_swap *ps)
-{
+	pb(ps);
 	if (ps->b->size > 1 && ps->b->head->index < ps->b->head->next->index)
 	{
 		sb(ps);
 	}
+}
+
+static void	process_b(t_push_swap *ps)
+{
+	t_list	*tmp;
+	int		position;
+
+	tmp = ps->b->head;
+	position = 0;
+	while (tmp && tmp->index != ps->b->size - 1)
+	{
+		tmp = tmp->next;
+		position++;
+	}
+	if (position < ps->b->size / 2)
+	{
+		while (position--)
+			rb(ps);
+	}
+	else
+	{
+		while (position++ < ps->b->size)
+			rrb(ps);
+	}
+	pa(ps);
 }
 
 static int	find_position_next(t_stack *stack, int start_index,
@@ -94,4 +110,6 @@ void	algo_medium(t_push_swap *ps)
 		}
 		i++;
 	}
+	while (ps->b->size)
+		process_b(ps);
 }
