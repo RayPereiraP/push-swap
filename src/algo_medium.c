@@ -110,6 +110,8 @@ void	algo_medium(t_push_swap *ps)
 		}
 		i++;
 	}
+	while (ps->a->size > 0)
+		process_a(ps, find_position_next(ps->a, i * bs, (i * bs) + bs - 1));
 	while (ps->b->size)
 		process_b(ps);
 }
