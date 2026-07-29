@@ -74,5 +74,6 @@ int					*index_array(int *stack, int size);
 t_push_swap			*init_push_swap(int *array, int size, int bench, char flag);
 void				free_stack(t_stack *stack);
 void				free_push_swap(t_push_swap *ps);
-
+int					ft_sqrt(int nb);
+int					is_sorted(t_stack *stack);
 #endif
