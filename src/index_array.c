@@ -33,12 +33,14 @@ static int	binary_search(int *list, int value, int size)
 	return (-1);
 }
 
-static void	merge(int *array, int *sorted, int start, int middle, int finish)
+static void	merge(int *array, int *sorted, int start, int finish)
 {
 	int	i;
 	int	j;
 	int	k;
+	int	middle;
 
+	middle = start + (finish - start) / 2;
 	i = start;
 	j = middle + 1;
 	k = start;
@@ -67,7 +69,7 @@ static void	merge_sort(int *array, int *sorted, int start, int finish)
 		middle = start + (finish - start) / 2;
 		merge_sort(array, sorted, start, middle);
 		merge_sort(array, sorted, middle + 1, finish);
-		merge(array, sorted, start, middle, finish);
+		merge(array, sorted, start, finish);
 	}
 }
 

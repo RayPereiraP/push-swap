@@ -12,9 +12,9 @@
 
 #include "../inc/push_swap.h"
 
-void algo_adaptive(t_push_swap *ps)
+void	algo_adaptive(t_push_swap *ps)
 {
-	double disorder;
+	double	disorder;
 
 	disorder = compute_disorder(ps->a);
 	if (disorder < 0.2)

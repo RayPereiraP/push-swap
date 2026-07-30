@@ -28,7 +28,9 @@ int	is_sorted(t_stack *stack)
 
 int	ft_sqrt(int nb)
 {
-	int i = 1;
+	int	i;
+
+	i = 1;
 	while (i * i < nb)
 		i++;
 	if (i * i == nb)
