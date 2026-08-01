@@ -19,7 +19,7 @@ static int	get_min_position(t_stack *stack)
 	int		min_value;
 	int		position;
 	int		i;
- 
+
 	cur = stack->head;
 	min_value = cur->value;
 	position = 0;
@@ -37,11 +37,11 @@ static int	get_min_position(t_stack *stack)
 	return (position);
 }
 
-//para rodar na A e trazer o menor nº até o topo, decide se vai mais rápido ou em cima ou para baixo
+// rotaciona 'a' até o menor valor chegar no topo, pelo caminho mais curto
 static void	rotate_to_min(t_push_swap *ps, int min_idx)
 {
 	int	size;
- 
+
 	size = ps->a->size;
 	if (min_idx <= size / 2)
 	{
@@ -61,11 +61,12 @@ static void	rotate_to_min(t_push_swap *ps, int min_idx)
 		}
 	}
 }
-//verificação de ordenação - se ok, para
+
+// verificação de ordenação - se ok, para
 void	algo_simple(t_push_swap *ps)
 {
 	int	min_idx;
- 
+
 	if (is_sorted(ps->a))
 		return ;
 	while (ps->a->size > 0)

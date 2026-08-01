@@ -10,7 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
+
+int	ft_sqrt(int nb)
+{
+	int	i;
+
+	if (nb <= 0)
+		return (0);
+	i = 1;
+	while (i * i < nb)
+		i++;
+	if (i * i == nb)
+		return (i);
+	return (i - 1);
+}
 
 long	ft_atol(const char *str)
 {
@@ -43,4 +57,20 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	t_list	*tmp;
+
+	if (!stack || !stack->head)
+		return (1);
+	tmp = stack->head;
+	while (tmp->next)
+	{
+		if (tmp->index > tmp->next->index)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }

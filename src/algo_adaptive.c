@@ -12,6 +12,21 @@
 
 #include "push_swap.h"
 
+void	algo_adaptive(t_push_swap *ps)
+{
+	double	disorder;
+
+	disorder = compute_disorder(ps->a);
+	if (disorder < 0.2)
+		algo_simple(ps);
+	else if (disorder < 0.5)
+		algo_medium(ps);
+	else
+		algo_complex(ps);
+}
+
+/*#include "push_swap.h"
+
 static void	process_a(t_push_swap *ps, int sorted)
 {
 	int	i;
@@ -58,3 +73,4 @@ void	algo_adaptive(t_push_swap *ps)
 	}
 	restore_stack(ps);
 }
+*/

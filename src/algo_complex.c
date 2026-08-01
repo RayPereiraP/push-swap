@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 // radix sort
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 // quantidade de bits necessária pra representar os índices (0 a size-1)
 static int	get_max_bits(t_stack *stack)

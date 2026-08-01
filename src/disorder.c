@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 double	compute_disorder(t_stack *stack)
 {
@@ -38,21 +38,3 @@ double	compute_disorder(t_stack *stack)
 	}
 	return ((double)mistakes / total_pairs);
 }
-
-// verifica se a stack está em ordem crescente
-int	is_sorted(t_stack *stack)
-{
-	t_list	*cur;
- 
-	if (!stack || stack->size <= 1)
-		return (1);
-	cur = stack->head;
-	while (cur->next)
-	{
-		if (cur->value > cur->next->value)
-			return (0);
-		cur = cur->next;
-	}
-	return (1);
-}
- 

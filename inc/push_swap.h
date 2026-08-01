@@ -28,7 +28,7 @@ typedef struct s_stack
 	t_list			*head;
 	t_list			*tail;
 	int				size;
-} 					t_stack;
+}					t_stack;
 
 typedef struct s_benchmark
 {
@@ -49,7 +49,7 @@ typedef struct s_flags
 {
 	char			flag;
 	int				bench;
-} 					t_flags;
+}					t_flags;
 
 typedef struct s_push_swap
 {
@@ -71,27 +71,39 @@ void				rra(t_push_swap *stack);
 void				rrb(t_push_swap *stack);
 void				rrr(t_push_swap *stack);
 
-double				compute_disorder(t_stack *stack); //Disorder / estado da stack 
-int					is_sorted(t_stack *stack); // Disorder / estado da stack
+// Disorder / estado da stack
+double				compute_disorder(t_stack *stack);
+int					is_sorted(t_stack *stack);
 
-int					*index_array(int *stack, int size); //Indexação
+// Indexação
+int					*index_array(int *stack, int size);
 
-void				algo_simple(t_push_swap *ps); //Algoritmos
+// Algoritmos
+void				algo_simple(t_push_swap *ps);
 void				algo_medium(t_push_swap *ps);
 void				algo_complex(t_push_swap *ps);
 void				algo_adaptive(t_push_swap *ps);
- 
-t_push_swap			*init_push_swap(int *array, int size, int bench, char flag); //Inicialização
- 
-int					parse_arguments(int argc, char **argv, int **array, int *size); //Parsing e flags
+
+// Inicialização
+t_push_swap			*init_push_swap(int *array, int size, int bench,
+						char flag);
+
+// Parsing e flags
+int					parse_arguments(int argc, char **argv, int **array,
+						int *size);
 int					handle_flags(int argc, char **argv, int *i, int *flags);
- 
-void				print_benchmark(t_push_swap *ps, double initial_disorder, int *flags);//Benchmark
- 
-void				free_stack(t_stack *stack); //memória
+
+// Benchmark
+void				print_benchmark(t_push_swap *ps, double initial_disorder,
+						int *flags);
+
+// Memória
+void				free_stack(t_stack *stack);
 void				free_push_swap(t_push_swap *ps);
 
-int					ft_strcmp(const char *s1, const char *s2);//utils
+// Utils
+int					ft_strcmp(const char *s1, const char *s2);
 long				ft_atol(const char *str);
+int					ft_sqrt(int nb);
 
 #endif

@@ -10,69 +10,108 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-// encontra a posição (0-based) do menor valor na stack a
-static int	get_min_position(t_stack *stack)
+static void	process_a(t_push_swap *ps, int position)
 {
-	t_list	*cur;
-	int		min_value;
-	int		position;
-	int		i;
- 
-	cur = stack->head;
-	min_value = cur->value;
-	position = 0;
-	i = 0;
-	while (cur)
+	if (position < ps->a->size / 2)
 	{
-		if (cur->value < min_value)
-		{
-			min_value = cur->value;
-			position = i;
-		}
-		cur = cur->next;
-		i++;
-	}
-	return (position);
-}
- 
-static void	rotate_to_min(t_push_swap *ps, int min_idx)
-{
-	int	size;
- 
-	size = ps->a->size;
-	if (min_idx <= size / 2)
-	{
-		while (min_idx > 0)
+		while (position)
 		{
 			ra(ps);
-			min_idx--;
+			position--;
 		}
 	}
 	else
 	{
-		min_idx = size - min_idx;
-		while (min_idx > 0)
+		while (position < ps->a->size)
 		{
 			rra(ps);
-			min_idx--;
+			position++;
 		}
 	}
+	pb(ps);
+	if (ps->b->size > 1 && ps->b->head->index < ps->b->head->next->index)
+	{
+		sb(ps);
+	}
 }
- 
+
+static void	process_b(t_push_swap *ps)
+{
+	t_list	*tmp;
+	int		position;
+
+	tmp = ps->b->head;
+	position = 0;
+	while (tmp && tmp->index != ps->b->size - 1)
+	{
+		tmp = tmp->next;
+		position++;
+	}
+	if (position < ps->b->size / 2)
+	{
+		while (position--)
+			rb(ps);
+	}
+	else
+	{
+		while (position++ < ps->b->size)
+			rrb(ps);
+	}
+	pa(ps);
+}
+
+static int	find_position_next(t_stack *stack, int start_index,
+		int finish_index)
+{
+	t_list	*tmp;
+	int		first_position;
+	int		last_position;
+	int		position;
+
+	tmp = stack->head;
+	first_position = -1;
+	last_position = -1;
+	position = 0;
+	while (tmp)
+	{
+		if (tmp->index >= start_index && tmp->index <= finish_index)
+		{
+			if (first_position == -1)
+				first_position = position;
+			last_position = position;
+		}
+		tmp = tmp->next;
+		position++;
+	}
+	if (first_position <= ((stack->size - last_position)))
+		return (first_position);
+	return (last_position);
+}
+
 void	algo_medium(t_push_swap *ps)
 {
-	int	min_idx;
- 
-	if (is_sorted(ps->a))
-		return ;
-	while (ps->a->size > 0)
+	int	bc;
+	int	bs;
+	int	bp;
+	int	i;
+
+	bc = ft_sqrt(ps->a->size);
+	bs = ps->a->size / bc;
+	i = 0;
+	while (i < bc)
 	{
-		min_idx = get_min_position(ps->a);
-		rotate_to_min(ps, min_idx);
-		pb(ps);
+		bp = 0;
+		while (bp < bs)
+		{
+			process_a(ps, find_position_next(ps->a, i * bs, (i * bs) + bs - 1));
+			bp++;
+		}
+		i++;
 	}
-	while (ps->b->size > 0)
-		pa(ps);
+	while (ps->a->size > 0)
+		process_a(ps, find_position_next(ps->a, i * bs, (i * bs) + bs - 1));
+	while (ps->b->size)
+		process_b(ps);
 }

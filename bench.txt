@@ -1,0 +1,13 @@
+========= BENCHMARK =========
+Size: 5
+Initial disorder: 1.0000
+Strategy: Adaptive / Automatico
+--- Operations breakdown ---
+sa: 0 | sb: 0 | ss: 0
+pa: 10 | pb: 10
+ra: 5 | rb: 0 | rr: 0
+rra: 0 | rrb: 0 | rrr: 0
+Total operations: 25
+Ops/size ratio: 5.0000
+Performance: EXCELLENT (< 700 ops)
+==============================

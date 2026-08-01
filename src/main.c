@@ -25,7 +25,7 @@ static void	execute_algo(t_push_swap *ps, int algo_flag)
 	else
 		algo_adaptive(ps);
 }
- 
+
 static t_push_swap	*parse_and_init(int argc, char **argv, int *flags)
 {
 	t_push_swap	*ps;
@@ -71,4 +71,3 @@ int	main(int argc, char **argv)
 	free_push_swap(ps);
 	return (0);
 }
-

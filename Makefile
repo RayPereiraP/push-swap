@@ -26,7 +26,7 @@ SRC_FILES	= main.c \
 			  disorder.c \
 			  free_memory.c \
 			  push_swap_init.c \
-			  stack_index.c \
+			  index_array.c \
 			  benchmark.c \
 			  operations_swap.c \
 			  operations_push.c \

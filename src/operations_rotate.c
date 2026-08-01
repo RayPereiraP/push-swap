@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_rotate.c                                :+:      :+:    :+:   */
+/*   operarions_rotate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/21 21:38:29 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/22 11:39:34 by rayperei         ###   ########.fr       */
+/*   Created: 2026/07/18 11:50:37 by wgolbert          #+#    #+#             */
+/*   Updated: 2026/07/18 11:50:37 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static void	rotate(t_stack *stack)
 {
@@ -49,4 +49,3 @@ void	rr(t_push_swap *ps)
 	if (ps->flags.bench == 0)
 		write(1, "rr\n", 3);
 }
-
