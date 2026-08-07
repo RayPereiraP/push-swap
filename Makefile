@@ -22,7 +22,6 @@ INC_DIR		= inc
 SRC_FILES	= main.c \
 			  parser.c \
 			  utils.c \
-			  flags.c \
 			  disorder.c \
 			  free_memory.c \
 			  push_swap_init.c \
