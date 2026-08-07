@@ -90,6 +90,7 @@ O projeto foi dividido em duas frentes principais de desenvolvimento,
 com sessões de pair programming para integração e revisão conjunta.
 
 ### rayperei (Dev A) — Validação de dados e performance algorítmica
+
 - **Parsing e tratamento de erros:** validação rigorosa dos argumentos
   (`parser.c`), detectando valores não numéricos, duplicados e fora dos
   limites de `int` (`INT_MIN`/`INT_MAX`).
@@ -103,20 +104,35 @@ com sessões de pair programming para integração e revisão conjunta.
   `stderr` (`benchmark.c`).
 
 ### wgolbert (Dev B) — Infraestrutura de dados e métrica matemática
-- **Operações base:** estrutura de dados das pilhas `a` e `b`
-  (`t_stack`/`t_list`) e as 11 operações fundamentais (`sa`, `pa`, `ra`,
+
+- **Inicialização do programa:** implementação da estrutura principal
+  `t_push_swap` e de toda a rotina de inicialização do estado da aplicação
+  (`push_swap_init.c`), responsável por configurar as pilhas, estruturas
+  auxiliares e contexto utilizado durante toda a execução.
+- **Operações base:** implementação da estrutura de dados das pilhas
+  (`t_stack`/`t_list`) e das 11 operações fundamentais (`sa`, `pa`, `ra`,
   `rra`, etc.), com gerenciamento de memória livre de vazamentos
   (`operations_*.c`, `free_memory.c`).
-- **Métrica de desordem:** função que calcula o nível de desordem da
-  pilha (entre 0 e 1) antes do início da ordenação (`disorder.c`).
+- **Indexação dos valores:** implementação da normalização dos números de
+  entrada por meio de ordenação e indexação (`index_array.c`), permitindo
+  que os algoritmos trabalhem sobre índices em vez dos valores originais.
+- **Métrica de desordem:** implementação da função que calcula o nível de
+  desordem da pilha (entre 0 e 1) antes do início da ordenação
+  (`disorder.c`).
 - **Algoritmo Médio (O(n√n)):** implementação do algoritmo por blocos em
   `algo_medium.c`.
+- **Estratégia Adaptativa:** implementação da lógica de seleção automática
+  do algoritmo de ordenação com base na métrica de desordem da pilha
+  (`algo_adaptive.c`), escolhendo dinamicamente entre as estratégias
+  Simples, Média e Complexa.
 
 ### Trabalho em conjunto
-- **Estratégia adaptativa:** lógica de seleção automática de algoritmo
-  com base nos limiares de desordem (`algo_adaptive.c`).
+
 - **Infraestrutura:** configuração do `Makefile` e revisão constante de
   conformidade com a Norma 42.
+- **Biblioteca de utilitários:** desenvolvimento e manutenção das funções
+  auxiliares compartilhadas entre diferentes módulos do projeto
+  (`utils.c`).
 
 ## Operações Permitidas
 

@@ -76,4 +76,15 @@ void				free_stack(t_stack *stack);
 void				free_push_swap(t_push_swap *ps);
 int					ft_sqrt(int nb);
 int					is_sorted(t_stack *stack);
+void				algo_adaptive(t_push_swap *ps);
+void				algo_complex(t_push_swap *ps);
+void				algo_medium(t_push_swap *ps);
+void				algo_simple(t_push_swap *ps);
+void				print_benchmark(t_push_swap *ps, double initial_disorder,
+						int *flags);
+int					parse_arguments(int argc, char **argv, int **array,
+						int *size);
+int					ft_strcmp(const char *s1, const char *s2);
+long				ft_atol(const char *str);
+
 #endif
