@@ -86,5 +86,6 @@ int					parse_arguments(int argc, char **argv, int **array,
 						int *size);
 int					ft_strcmp(const char *s1, const char *s2);
 long				ft_atol(const char *str);
+int					handle_flags(int argc, char **argv, int *i, int *flags);
 
 #endif
