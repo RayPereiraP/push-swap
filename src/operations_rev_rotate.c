@@ -1,51 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_rotate.c                                :+:      :+:    :+:   */
+/*   operations_rev_rotate.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/18 11:50:37 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/18 11:50:37 by wgolbert         ###   ########.fr       */
+/*   Created: 2026/07/18 11:51:07 by wgolbert          #+#    #+#             */
+/*   Updated: 2026/07/18 11:51:07 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-static void	rotate(t_stack *stack)
+static void	reverse_rotate(t_stack *stack)
 {
-	t_list	*tmp;
+	t_list	*last;
+	t_list	*prev;
 
 	if (stack->size <= 1)
 		return ;
-	tmp = stack->head;
-	stack->head = tmp->next;
-	stack->tail->next = tmp;
-	stack->tail = tmp;
-	tmp->next = NULL;
+	prev = stack->head;
+	while (prev->next != stack->tail)
+		prev = prev->next;
+	last = stack->tail;
+	prev->next = NULL;
+	stack->tail = prev;
+	last->next = stack->head;
+	stack->head = last;
 }
 
-void	ra(t_push_swap *ps)
+void	rra(t_push_swap *ps)
 {
-	rotate(ps->a);
-	ps->benchmark.ra++;
+	reverse_rotate(ps->a);
+	ps->benchmark.rra++;
 	if (ps->flags.bench == 0)
-		write(1, "ra\n", 3);
+		write(1, "rra\n", 4);
 }
 
-void	rb(t_push_swap *ps)
+void	rrb(t_push_swap *ps)
 {
-	rotate(ps->b);
-	ps->benchmark.rb++;
+	reverse_rotate(ps->b);
+	ps->benchmark.rrb++;
 	if (ps->flags.bench == 0)
-		write(1, "rb\n", 3);
+		write(1, "rrb\n", 4);
 }
 
-void	rr(t_push_swap *ps)
+void	rrr(t_push_swap *ps)
 {
-	rotate(ps->a);
-	rotate(ps->b);
-	ps->benchmark.rr++;
+	reverse_rotate(ps->a);
+	reverse_rotate(ps->b);
+	ps->benchmark.rrr++;
 	if (ps->flags.bench == 0)
-		write(1, "rr\n", 3);
+		write(1, "rrr\n", 4);
 }

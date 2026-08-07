@@ -1,51 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_rotate.c                                :+:      :+:    :+:   */
+/*   operations_swap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/18 11:50:37 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/18 11:50:37 by wgolbert         ###   ########.fr       */
+/*   Created: 2026/07/18 11:51:13 by wgolbert          #+#    #+#             */
+/*   Updated: 2026/07/18 11:51:13 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-static void	rotate(t_stack *stack)
+static void	swap(t_stack *stack)
 {
 	t_list	*tmp;
 
 	if (stack->size <= 1)
 		return ;
-	tmp = stack->head;
-	stack->head = tmp->next;
-	stack->tail->next = tmp;
-	stack->tail = tmp;
-	tmp->next = NULL;
+	tmp = stack->head->next;
+	stack->head->next = tmp->next;
+	tmp->next = stack->head;
+	stack->head = tmp;
+	if (stack->size == 2)
+		stack->tail = stack->head->next;
 }
 
-void	ra(t_push_swap *ps)
+void	sa(t_push_swap *ps)
 {
-	rotate(ps->a);
-	ps->benchmark.ra++;
+	swap(ps->a);
+	ps->benchmark.sa++;
 	if (ps->flags.bench == 0)
-		write(1, "ra\n", 3);
+		write(1, "sa\n", 3);
 }
 
-void	rb(t_push_swap *ps)
+void	sb(t_push_swap *ps)
 {
-	rotate(ps->b);
-	ps->benchmark.rb++;
+	swap(ps->b);
+	ps->benchmark.sb++;
 	if (ps->flags.bench == 0)
-		write(1, "rb\n", 3);
+		write(1, "sb\n", 3);
 }
 
-void	rr(t_push_swap *ps)
+void	ss(t_push_swap *ps)
 {
-	rotate(ps->a);
-	rotate(ps->b);
-	ps->benchmark.rr++;
+	swap(ps->a);
+	swap(ps->b);
+	ps->benchmark.ss++;
 	if (ps->flags.bench == 0)
-		write(1, "rr\n", 3);
+		write(1, "ss\n", 3);
 }

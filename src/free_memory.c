@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   disorder.c                                         :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/18 17:34:37 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/18 17:34:37 by wgolbert         ###   ########.fr       */
+/*   Created: 2026/07/24 18:12:49 by wgolbert          #+#    #+#             */
+/*   Updated: 2026/07/24 18:12:49 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-double	compute_disorder(t_stack *stack)
+static void	free_list(t_list *list)
 {
-	int		mistakes;
-	int		total_pairs;
-	t_list	*cur;
-	t_list	*next;
+	t_list	*tmp;
 
-	if (stack->size < 2)
-		return (0);
-	mistakes = 0;
-	total_pairs = 0;
-	cur = stack->head;
-	while (cur)
+	tmp = NULL;
+	while (list)
 	{
-		next = cur->next;
-		while (next)
-		{
-			total_pairs++;
-			if (cur->value > next->value)
-				mistakes++;
-			next = next->next;
-		}
-		cur = cur->next;
+		tmp = list->next;
+		free(list);
+		list = tmp;
 	}
-	return ((double)mistakes / total_pairs);
+}
+
+void	free_stack(t_stack *stack)
+{
+	if (!stack)
+		return ;
+	free_list(stack->head);
+	free(stack);
+}
+
+void	free_push_swap(t_push_swap *ps)
+{
+	if (ps->a)
+		free_stack(ps->a);
+	if (ps->b)
+		free_stack(ps->b);
+	free(ps);
 }
