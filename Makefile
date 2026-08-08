@@ -59,9 +59,11 @@ $(OBJ_DIR):
 
 clean:
 	rm -rf $(OBJ_DIR)
+	$(MAKE) -C $(PRINTF_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(PRINTF_DIR) fclean
 
 re: fclean all
 
