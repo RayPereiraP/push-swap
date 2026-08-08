@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   benchmark.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
-/*   Updated: 2026/08/08 18:35:48 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:09:37 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	print_ops_breakdown(t_benchmark *b)
 		b->rra, b->rrb, b->rrr);
 }
 
-void	print_benchmark(t_push_swap *ps, double initial_disorder, int *flags)
+void	print_benchmark(t_push_swap *ps, double initial_disorder, t_flags flags)
 {
 	int	total_ops;
 

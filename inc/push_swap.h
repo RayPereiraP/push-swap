@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 12:38:59 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/08/08 18:58:40 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:09:14 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				algo_complex(t_push_swap *ps);
 void				algo_medium(t_push_swap *ps);
 void				algo_simple(t_push_swap *ps);
 void				print_benchmark(t_push_swap *ps, double initial_disorder,
-						int *flags);
+						t_flags flags);
 int					parse_arguments(int argc, char **argv, int **array,
 						int *size);
 int					ft_strcmp(const char *s1, const char *s2);
