@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+         #
+#    By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/28 21:05:01 by rayperei          #+#    #+#              #
-#    Updated: 2026/08/08 19:37:28 by rayperei         ###   ########.fr        #
+#    Updated: 2026/08/08 20:09:51 by wgolbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CFLAGS		= -Wall -Wextra -Werror -Iinc
 SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= inc
+PRINTF_DIR  = ft_printf
 
 SRC_FILES	= main.c \
 			parser.c \
@@ -40,12 +41,17 @@ SRC_FILES	= main.c \
 			  
 SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
+PRINTF 		= $(PRINTF_DIR)/libftprintf.a
+
 OBJS		= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-all: $(NAME)
+all: $(PRINTF) $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(PRINTF):
+	$(MAKE) -C $(PRINTF_DIR)
+
+$(NAME): $(OBJS) $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@

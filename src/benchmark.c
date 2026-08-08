@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   benchmark.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
-/*   Updated: 2026/08/08 19:30:52 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 20:11:43 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include <stdio.h>
+#include "../inc/push_swap.h"
+#include "../ft_printf/ft_printf.h"
 
 static int	get_total_ops(t_benchmark *b)
 {
