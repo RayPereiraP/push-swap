@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:24 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/23 14:39:24 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:01:36 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include <stdlib.h>
 
 // decide qual algoritmo executar, com base na flag escolhida
-static void	execute_algo(t_push_swap *ps, int algo_flag)
+static void	execute_algo(t_push_swap *ps)
 {
-	if (algo_flag == 1)
+	if (ps->flags.flag == 's')
 		algo_simple(ps);
-	else if (algo_flag == 2)
+	else if (ps->flags.flag == 'm')
 		algo_medium(ps);
-	else if (algo_flag == 3)
+	else if (ps->flags.flag == 'c')
 		algo_complex(ps);
 	else
 		algo_adaptive(ps);
 }
 
-static t_push_swap	*parse_and_init(int argc, char **argv, int *flags)
+static t_push_swap	*parse_and_init(int argc, char **argv, t_flags flags)
 {
 	t_push_swap	*ps;
 	int			*array;
@@ -34,8 +34,6 @@ static t_push_swap	*parse_and_init(int argc, char **argv, int *flags)
 	int			i;
 
 	i = 1;
-	flags[0] = 0;
-	flags[1] = 0;
 	handle_flags(argc, argv, &i, flags);
 	if (parse_arguments(argc - i, argv + i, &array, &size) != 0)
 		return (NULL);
@@ -44,7 +42,7 @@ static t_push_swap	*parse_and_init(int argc, char **argv, int *flags)
 		free(array);
 		exit(0);
 	}
-	ps = init_push_swap(array, size, flags[1], (char)flags[0]);
+	ps = init_push_swap(array, size, flags);
 	free(array);
 	return (ps);
 }
@@ -52,7 +50,7 @@ static t_push_swap	*parse_and_init(int argc, char **argv, int *flags)
 int	main(int argc, char **argv)
 {
 	t_push_swap	*ps;
-	int			flags[2];
+	t_flags		flags;
 	double		disorder;
 
 	if (argc < 2)
@@ -65,8 +63,8 @@ int	main(int argc, char **argv)
 	}
 	disorder = compute_disorder(ps->a);
 	if (!is_sorted(ps->a))
-		execute_algo(ps, flags[0]);
-	if (flags[1])
+		execute_algo(ps);
+	if (ps->flags.bench)
 		print_benchmark(ps, disorder, flags);
 	free_push_swap(ps);
 	return (0);

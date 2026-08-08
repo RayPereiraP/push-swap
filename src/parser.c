@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:34:26 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/23 14:34:35 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 18:53:51 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,20 @@ int	parse_arguments(int argc, char **argv, int **array, int *size)
 	return (0);
 }
 
-int	handle_flags(int argc, char **argv, int *i, int *flags)
+int	handle_flags(int argc, char **argv, int *i, t_flags flags)
 {
 	while (*i < argc && argv[*i][0] == '-' && argv[*i][1] == '-')
 	{
 		if (ft_strcmp(argv[*i], "--simple") == 0)
-			flags[0] = 1;
+			flags.flag = 's';
 		else if (ft_strcmp(argv[*i], "--medium") == 0)
-			flags[0] = 2;
+			flags.flag = 'm';
 		else if (ft_strcmp(argv[*i], "--complex") == 0)
-			flags[0] = 3;
+			flags.flag = 'c';
 		else if (ft_strcmp(argv[*i], "--adaptive") == 0)
-			flags[0] = 0;
+			flags.flag = 'a';
 		else if (ft_strcmp(argv[*i], "--bench") == 0)
-			flags[1] = 1;
+			flags.bench = 1;
 		else
 			break ;
 		(*i)++;

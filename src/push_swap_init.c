@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 21:21:02 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/08/06 21:21:02 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 18:57:56 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_benchmark	init_benchmark(void)
 	return (benchmark);
 }
 
-t_push_swap	*init_push_swap(int *array, int size, int bench, char flag)
+t_push_swap	*init_push_swap(int *array, int size, t_flags flags)
 {
 	t_push_swap	*ps;
 
@@ -113,8 +113,7 @@ t_push_swap	*init_push_swap(int *array, int size, int bench, char flag)
 		free_push_swap(ps);
 		return (NULL);
 	}
-	ps->flags.bench = bench;
-	ps->flags.flag = flag;
+	ps->flags = flags;
 	ps->benchmark = init_benchmark();
 	return (ps);
 }

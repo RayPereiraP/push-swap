@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 12:38:59 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/23 12:38:59 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 18:58:40 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				rrb(t_push_swap *stack);
 void				rrr(t_push_swap *stack);
 double				compute_disorder(t_stack *stack);
 int					*index_array(int *stack, int size);
-t_push_swap			*init_push_swap(int *array, int size, int bench, char flag);
+t_push_swap			*init_push_swap(int *array, int size, t_flags flags);
 void				free_stack(t_stack *stack);
 void				free_push_swap(t_push_swap *ps);
 int					ft_sqrt(int nb);
@@ -86,6 +86,6 @@ int					parse_arguments(int argc, char **argv, int **array,
 						int *size);
 int					ft_strcmp(const char *s1, const char *s2);
 long				ft_atol(const char *str);
-int					handle_flags(int argc, char **argv, int *i, int *flags);
+int					handle_flags(int argc, char **argv, int *i, t_flags flags);
 
 #endif
