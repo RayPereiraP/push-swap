@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:24 by rayperei          #+#    #+#             */
-/*   Updated: 2026/08/08 19:01:36 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:54:01 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_push_swap	*parse_and_init(int argc, char **argv, t_flags flags)
 	int			i;
 
 	i = 1;
-	handle_flags(argc, argv, &i, flags);
+	handle_flags(argc, argv, &i, &flags);
 	if (parse_arguments(argc - i, argv + i, &array, &size) != 0)
 		return (NULL);
 	if (size < 2)
@@ -53,6 +53,7 @@ int	main(int argc, char **argv)
 	t_flags		flags;
 	double		disorder;
 
+	flags = (t_flags){0};
 	if (argc < 2)
 		return (0);
 	ps = parse_and_init(argc, argv, flags);
@@ -65,7 +66,7 @@ int	main(int argc, char **argv)
 	if (!is_sorted(ps->a))
 		execute_algo(ps);
 	if (ps->flags.bench)
-		print_benchmark(ps, disorder, flags);
+		print_benchmark(ps, disorder, ps->flags);
 	free_push_swap(ps);
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+         #
+#    By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/28 21:05:01 by rayperei          #+#    #+#              #
-#    Updated: 2026/07/23 14:46:25 by rayperei         ###   ########.fr        #
+#    Updated: 2026/08/08 19:37:28 by rayperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,21 +20,23 @@ OBJ_DIR		= obj
 INC_DIR		= inc
 
 SRC_FILES	= main.c \
-			  parser.c \
-			  utils.c \
-			  disorder.c \
-			  free_memory.c \
-			  push_swap_init.c \
-			  index_array.c \
-			  benchmark.c \
-			  operations_swap.c \
-			  operations_push.c \
-			  operations_rotate.c \
-			  operations_rev_rotate.c \
-			  algo_simple.c \
-			  algo_medium.c \
-			  algo_complex.c \
-			  algo_adaptive.c
+			parser.c \
+			utils.c \
+			disorder.c \
+			free_memory.c \
+			push_swap_init.c \
+			index_array.c \
+			benchmark.c \
+			operations_swap.c \
+			operations_push.c \
+			operations_rotate.c \
+			operations_rev_rotate.c \
+			algo_simple.c \
+			algo_medium.c \
+			algo_complex.c \
+			algo_adaptive.c \
+			ft_printf.c \
+			utils_ft_printf.c
 			  
 SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
