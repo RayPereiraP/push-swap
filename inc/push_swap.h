@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 12:38:59 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/08/08 19:52:10 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 20:14:21 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,5 @@ int					parse_arguments(int argc, char **argv, int **array,
 int					ft_strcmp(const char *s1, const char *s2);
 long				ft_atol(const char *str);
 int					handle_flags(int argc, char **argv, int *i, t_flags *flags);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char *s, int fd);
-void				ft_putnbr_fd(long n, int fd);
-void				ft_putunbr_fd(unsigned long n, int fd);
-void				ft_putdouble_fd(double n, int fd);
-void				ft_printf(FILE *stream, const char *fmt, ...);
 
 #endif
