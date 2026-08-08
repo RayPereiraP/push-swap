@@ -6,7 +6,7 @@
 #    By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/28 21:05:01 by rayperei          #+#    #+#              #
-#    Updated: 2026/08/08 20:09:51 by wgolbert         ###   ########.fr        #
+#    Updated: 2026/08/08 20:22:59 by wgolbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,7 @@ SRC_FILES	= main.c \
 			algo_simple.c \
 			algo_medium.c \
 			algo_complex.c \
-			algo_adaptive.c \
-			ft_printf.c \
-			utils_ft_printf.c
+			algo_adaptive.c 
 			  
 SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
