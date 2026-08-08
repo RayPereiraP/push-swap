@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   benchmark.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
-/*   Updated: 2026/07/22 11:34:46 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 18:35:48 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,51 +30,24 @@ static char	*get_strategy_info(int algo_flag)
 	return ("Adaptive / Automatico");
 }
 
-static void	check_performance(int size, int total_ops)
-{
-	fprintf(stderr, "Performance: ");
-	if (size <= 100)
-	{
-		if (total_ops < 700)
-			fprintf(stderr, "EXCELLENT (< 700 ops)\n");
-		else
-			fprintf(stderr, "Standard (Check PUSH.pdf limits)\n");
-	}
-	else if (size <= 500)
-	{
-		if (total_ops < 5500)
-			fprintf(stderr, "EXCELLENT (< 5500 ops)\n");
-		else
-			fprintf(stderr, "Standard (Check PUSH.pdf limits)\n");
-	}
-	else
-		fprintf(stderr, "Standard (Check PUSH.pdf limits)\n");
-}
-
 static void	print_ops_breakdown(t_benchmark *b)
 {
-	fprintf(stderr, "--- Operations breakdown ---\n");
-	fprintf(stderr, "sa: %d | sb: %d | ss: %d\n", b->sa, b->sb, b->ss);
-	fprintf(stderr, "pa: %d | pb: %d\n", b->pa, b->pb);
-	fprintf(stderr, "ra: %d | rb: %d | rr: %d\n", b->ra, b->rb, b->rr);
-	fprintf(stderr, "rra: %d | rrb: %d | rrr: %d\n", b->rra, b->rrb, b->rrr);
+	fprintf(stderr, "[bench] sa: %d | sb: %d | ss: %d\n",
+		b->sa, b->sb, b->ss);
+	fprintf(stderr, "[bench] pa: %d | pb: %d\n", b->pa, b->pb);
+	fprintf(stderr, "[bench] ra: %d | rb: %d | rr: %d\n",
+		b->ra, b->rb, b->rr);
+	fprintf(stderr, "[bench] rra: %d | rrb: %d | rrr: %d\n",
+		b->rra, b->rrb, b->rrr);
 }
 
 void	print_benchmark(t_push_swap *ps, double initial_disorder, int *flags)
 {
 	int	total_ops;
-	int	size;
 
 	total_ops = get_total_ops(&ps->benchmark);
-	size = ps->a->size + ps->b->size;
-	fprintf(stderr, "========= BENCHMARK =========\n");
-	fprintf(stderr, "Size: %d\n", size);
-	fprintf(stderr, "Initial disorder: %.4f\n", initial_disorder);
-	fprintf(stderr, "Strategy: %s\n", get_strategy_info(flags[0]));
+	fprintf(stderr, "[bench] disorder: %.2f%%\n", initial_disorder * 100);
+	fprintf(stderr, "[bench] strategy: %s\n", get_strategy_info(flags[0]));
+	fprintf(stderr, "[bench] total_ops: %d\n", total_ops);
 	print_ops_breakdown(&ps->benchmark);
-	fprintf(stderr, "Total operations: %d\n", total_ops);
-	if (size > 0)
-		fprintf(stderr, "Ops/size ratio: %.4f\n", (double)total_ops / size);
-	check_performance(size, total_ops);
-	fprintf(stderr, "==============================\n");
 }
