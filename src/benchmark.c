@@ -6,7 +6,7 @@
 /*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
-/*   Updated: 2026/08/08 18:35:48 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:09:27 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void	print_ops_breakdown(t_benchmark *b)
 		b->rra, b->rrb, b->rrr);
 }
 
-void	print_benchmark(t_push_swap *ps, double initial_disorder, int *flags)
+void	print_benchmark(t_push_swap *ps, double initial_disorder, t_flags flags)
 {
 	int	total_ops;
 
 	total_ops = get_total_ops(&ps->benchmark);
 	fprintf(stderr, "[bench] disorder: %.2f%%\n", initial_disorder * 100);
-	fprintf(stderr, "[bench] strategy: %s\n", get_strategy_info(flags[0]));
+	fprintf(stderr, "[bench] strategy: %s\n", get_strategy_info(flags.strategy));
 	fprintf(stderr, "[bench] total_ops: %d\n", total_ops);
 	print_ops_breakdown(&ps->benchmark);
 }

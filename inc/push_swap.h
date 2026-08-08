@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 12:38:59 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/08/08 18:58:40 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:10:13 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				algo_adaptive(t_push_swap *ps);
 void				algo_complex(t_push_swap *ps);
 void				algo_medium(t_push_swap *ps);
 void				algo_simple(t_push_swap *ps);
-void				print_benchmark(t_push_swap *ps, double initial_disorder,
+void				print_benchmark(t_push_swap *ps, double initial_disorder, t_flags flags),
 						int *flags);
 int					parse_arguments(int argc, char **argv, int **array,
 						int *size);
