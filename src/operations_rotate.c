@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 11:50:37 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/18 11:50:37 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 18:07:46 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ void	ra(t_push_swap *ps)
 {
 	rotate(ps->a);
 	ps->benchmark.ra++;
-	if (ps->flags.bench == 0)
-		write(1, "ra\n", 3);
+	write(1, "ra\n", 3);
 }
 
 void	rb(t_push_swap *ps)
 {
 	rotate(ps->b);
 	ps->benchmark.rb++;
-	if (ps->flags.bench == 0)
-		write(1, "rb\n", 3);
+	write(1, "rb\n", 3);
 }
 
 void	rr(t_push_swap *ps)
@@ -46,6 +44,5 @@ void	rr(t_push_swap *ps)
 	rotate(ps->a);
 	rotate(ps->b);
 	ps->benchmark.rr++;
-	if (ps->flags.bench == 0)
-		write(1, "rr\n", 3);
+	write(1, "rr\n", 3);
 }

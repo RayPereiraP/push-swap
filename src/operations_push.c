@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 11:50:44 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/18 11:50:44 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 18:08:21 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	pb(t_push_swap *ps)
 	if (ps->b->size == 1)
 		ps->b->tail = ps->b->head;
 	ps->benchmark.pb++;
-	if (ps->flags.bench == 0)
-		write(1, "pb\n", 3);
+	write(1, "pb\n", 3);
 }
 
 void	pa(t_push_swap *ps)
@@ -54,6 +53,5 @@ void	pa(t_push_swap *ps)
 	if (ps->a->size == 1)
 		ps->a->tail = ps->a->head;
 	ps->benchmark.pa++;
-	if (ps->flags.bench == 0)
-		write(1, "pa\n", 3);
+	write(1, "pa\n", 3);
 }

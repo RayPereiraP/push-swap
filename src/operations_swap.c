@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 11:51:13 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/18 11:51:13 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/08 18:07:33 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ void	sa(t_push_swap *ps)
 {
 	swap(ps->a);
 	ps->benchmark.sa++;
-	if (ps->flags.bench == 0)
-		write(1, "sa\n", 3);
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_push_swap *ps)
 {
 	swap(ps->b);
 	ps->benchmark.sb++;
-	if (ps->flags.bench == 0)
-		write(1, "sb\n", 3);
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_push_swap *ps)
@@ -47,6 +45,5 @@ void	ss(t_push_swap *ps)
 	swap(ps->a);
 	swap(ps->b);
 	ps->benchmark.ss++;
-	if (ps->flags.bench == 0)
-		write(1, "ss\n", 3);
+	write(1, "ss\n", 3);
 }
