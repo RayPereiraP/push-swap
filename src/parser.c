@@ -6,7 +6,7 @@
 /*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:34:26 by rayperei          #+#    #+#             */
-/*   Updated: 2026/08/08 19:55:21 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/08 21:02:46 by rayperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int	handle_flags(int argc, char **argv, int *i, t_flags *flags)
 			flags->flag = 'a';
 		else if (ft_strcmp(argv[*i], "--bench") == 0)
 			flags->bench = 1;
+		(*i)++;
 	}
 	return (0);
 }
