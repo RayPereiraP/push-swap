@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 	if (!ps)
 	{
 		write(2, "Error\n", 6);
-		return (1);
+		exit (1);
 	}
 	disorder = compute_disorder(ps->a);
 	if (!is_sorted(ps->a))
