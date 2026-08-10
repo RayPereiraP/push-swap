@@ -23,7 +23,9 @@ SRC = ft_puthexa \
 	ft_putnbr \
 	ft_putstr \
 	ft_printf \
-	ft_putchar
+	ft_putchar \
+	ft_putfloat \
+	ft_putpercent
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(addsuffix .o, $(SRC))

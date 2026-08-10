@@ -22,7 +22,7 @@ int	ft_puthexa(unsigned long n, int upper);
 int	ft_putstr(char *str);
 int	ft_putptr(void *ptr);
 int	ft_putchar(char c);
-int	ft_putfloat(double n, int precision);
+int	ft_putfloat(double f, int precision);
 int	ft_putpercent(double n);
 int	ft_printf(const char *s, ...);
 
