@@ -28,6 +28,10 @@ static int	ft_convert(char c, va_list args)
 		return (ft_puthexa(va_arg(args, unsigned int), 1));
 	if (c == 'u')
 		return (ft_putnbr(va_arg(args, unsigned int)));
+	if (c == 'f')
+		return (ft_putfloat(va_arg(args, double), 2));
+	if (c == 'p')
+		return (ft_putpercent(va_arg(args, double)));
 	if (c == '%')
 		return (ft_putstr("%"));
 	ft_putchar('%');

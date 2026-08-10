@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putpercent.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/28 12:57:02 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/07/03 13:29:56 by wgolbert         ###   ########.fr       */
+/*   Created: 2026/08/09 22:12:33 by wgolbert          #+#    #+#             */
+/*   Updated: 2026/08/09 22:12:33 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_putpercent(double n)
+{
+	int	percent;
+	int	count;
 
-int	ft_putnbr(long n);
-int	ft_puthexa(unsigned long n, int upper);
-int	ft_putstr(char *str);
-int	ft_putptr(void *ptr);
-int	ft_putchar(char c);
-int	ft_putfloat(double n, int precision);
-int	ft_putpercent(double n);
-int	ft_printf(const char *s, ...);
-
-#endif
+	count = 0;
+	percent = n * 10000;
+	count += ft_putnbr(percent / 100);
+	count += ft_putchar('.');
+	if (percent % 100 < 10)
+		count += ft_putchar('0');
+	count += ft_putnbr(percent % 100);
+	count += ft_putchar('%');
+	return (count);
+}
