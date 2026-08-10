@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
 // verifica se a string representa um número válido
 static int	is_number(char *str)
