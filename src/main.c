@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 // decide qual algoritmo executar, com base na flag escolhida
 static void	execute_algo(t_push_swap *ps)
