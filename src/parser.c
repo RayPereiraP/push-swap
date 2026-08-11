@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rayperei <rayperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:34:26 by rayperei          #+#    #+#             */
-/*   Updated: 2026/08/08 21:02:46 by rayperei         ###   ########.fr       */
+/*   Updated: 2026/08/11 10:47:08 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 // verifica se a string representa um número válido
 static int	is_number(char *str)
