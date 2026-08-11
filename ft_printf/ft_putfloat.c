@@ -28,6 +28,7 @@ static int	ft_after_dot(double f, int precision)
 	}
 	return (count);
 }
+
 int	ft_putfloat(double f, int precision)
 {
 	int	count;

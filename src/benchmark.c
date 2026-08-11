@@ -51,7 +51,7 @@ void	print_benchmark(t_push_swap *ps, double initial_disorder, t_flags flags)
 	int	total_ops;
 
 	total_ops = get_total_ops(&ps->benchmark);
-	ft_printf("[bench] disorder: %p\n", initial_disorder);
+	ft_printf("[bench] disorder: %f\n", initial_disorder);
 	ft_printf("[bench] strategy: %s\n", get_strategy_info(flags.flag,
 			initial_disorder));
 	ft_printf("[bench] total_ops: %d\n", total_ops);
