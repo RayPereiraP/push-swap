@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/28 13:02:24 by wgolbert          #+#    #+#             */
-/*   Updated: 2026/06/29 19:11:58 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/11 11:30:12 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_convert(char c, va_list args)
 		return (ft_putnbr(va_arg(args, unsigned int)));
 	if (c == 'f')
 		return (ft_putfloat(va_arg(args, double), 2));
-	if (c == 'p')
+	if (c == 'P')
 		return (ft_putpercent(va_arg(args, double)));
 	if (c == '%')
 		return (ft_putstr("%"));
