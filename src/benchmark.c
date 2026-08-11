@@ -6,7 +6,7 @@
 /*   By: wgolbert <wgolbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:00:04 by rayperei          #+#    #+#             */
-/*   Updated: 2026/08/11 11:30:32 by wgolbert         ###   ########.fr       */
+/*   Updated: 2026/08/11 12:39:54 by wgolbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static char	*get_strategy_info(char algo_flag, double disorder)
 
 static void	print_ops_breakdown(t_benchmark *b)
 {
-	ft_printf("[bench] sa: %d | sb: %d | ss: %d\n", b->sa, b->sb, b->ss);
-	ft_printf("[bench] pa: %d | pb: %d\n", b->pa, b->pb);
-	ft_printf("[bench] ra: %d | rb: %d | rr: %d\n", b->ra, b->rb, b->rr);
-	ft_printf("[bench] rra: %d | rrb: %d | rrr: %d\n", b->rra, b->rrb, b->rrr);
+	ft_printf("[bench] sa: %d | sb: %d | ss: %d pa: %d | pb: %d\n", b->sa,
+		b->sb, b->ss, b->pa, b->pb);
+	ft_printf("[bench] ra: %d | rb: %d | rr: %d rra: %d | rrb: %d | rrr: %d\n",
+		b->ra, b->rb, b->rr, b->rra, b->rrb, b->rrr);
 }
 
 void	print_benchmark(t_push_swap *ps, double initial_disorder, t_flags flags)
